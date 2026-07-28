@@ -1,6 +1,14 @@
 # Jacob Ethington - Movie Finder
 ## WDD 330 - Web Frontend Development II
 
+GitHub:
+https://github.com/jdethington/WDD330-Final-Project
+
+Render.com site:
+https://wdd330-final-project-bg8o.onrender.com
+
+
+
 ### Common Workflow Commands
 
 - `npm run lint` to run ESLint against your code to find errors.
