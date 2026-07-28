@@ -1,34 +1,18 @@
 :root {
-  --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --font-headline: "Playfair Display", serif;
   /* colors */
-  --primary-color: #f0a868;
+  /* --primary-color: #f0a868;
   --secondary-color: #525b0f;
   --tertiary-color: #8a470c;
   --light-grey: #d0d0d0;
-  --dark-grey: #303030;
+  --dark-grey: #303030; */
 
-  /* •	Primary: Blue #2563EB
-•	Secondary: Dark Blue #1E293B
-•	Accent: Orange #F59E0B
-•	Background: Off White #F8FAFC
-•	Text: Dark Blue #111827 */
-
-  /* .roboto-<uniquifier> {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-} */
-
-  /* .playfair-display-<uniquifier> {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-} */
+  --primary: #2563eb;
+  --secondary: #1e293b;
+  --accent: #f59e0b;
+  --background: #f8fafc;
+  --text: #111827;
 
   /* sizes */
   --font-base: 18px;
@@ -45,8 +29,8 @@
 body {
   font-family: var(--font-body);
   font-size: var(--font-base);
-  color: var(--dark-grey);
-  background-color: var(--dark-grey);
+  color: var(--text);
+  background-color: var(--background);
 }
 
 img {
@@ -116,7 +100,24 @@ p {
 .logo--square > div {
   margin-top: -1.7em;
 }
-
+.search {
+  display: flex;
+  align-content: start;
+  align-items: stretch;
+  position: relative;
+}
+.search-logo {
+  width: 25px;
+  position: absolute;
+  left: 12px;
+  top: 20px;
+}
+.search-text {
+  padding: 12px;
+  margin: 1rem;
+  border-radius: 500px;
+  width: auto;
+}
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -124,7 +125,7 @@ p {
 
 button {
   padding: 0.5em 2em;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   color: white;
   margin: auto;
   display: block;
@@ -134,7 +135,7 @@ button {
 }
 
 .divider {
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid var(--primary);
 }
 
 /* End utility classes */
