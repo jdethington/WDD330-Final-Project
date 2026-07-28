@@ -8,6 +8,28 @@
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
 
+  /* •	Primary: Blue #2563EB
+•	Secondary: Dark Blue #1E293B
+•	Accent: Orange #F59E0B
+•	Background: Off White #F8FAFC
+•	Text: Dark Blue #111827 */
+
+  /* .roboto-<uniquifier> {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+} */
+
+  /* .playfair-display-<uniquifier> {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
   /* sizes */
   --font-base: 18px;
   --small-font: 0.8em;
@@ -24,6 +46,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-base);
   color: var(--dark-grey);
+  background-color: var(--dark-grey);
 }
 
 img {
