@@ -1,29 +1,57 @@
 import { loadHeaderFooter } from "./utils.mjs";
-// import MovieData from "./MovieData.mjs";
 
 loadHeaderFooter();
 
 // =====================================================================
-import { getMovie } from "./MovieData.mjs";
-import { displayMovie } from "./MovieList.mjs";
+import { searchShows, getShow } from "./MovieData.mjs";
+// import { getMovie, searchShows, getShow } from "./MovieData.mjs";
+import { displayMovie, displayResults } from "./MovieList.mjs";
 
-const button = document.querySelector("#searchBtn");
+// const button = document.querySelector("#searchBtn");
 
-button.addEventListener("click", async () => {
-  const id = document.querySelector("#movieId").value;
+// button.addEventListener("click", async () => {
+//   const id = document.querySelector("#movieId").value;
 
-  try {
-    const movie = await getMovie(id);
+//   try {
+//     const movie = await getMovie(id);
 
-    // console.log(movie);
+//     // console.log(movie);
 
-      displayMovie(movie);
-    // console.log(movie);
-      
-  } catch (error) {
-    alert(error.message);
-  }
-});
+//       displayMovie(movie);
+//     // console.log(movie);
+
+//   } catch (error) {
+//     alert(error.message);
+//   }
+// });
 
 // =====================================================================
 
+document.querySelector("#searchBtn").addEventListener("click", search);
+
+async function search() {
+    try {
+        
+        const title = document.querySelector("#searchInput").value.trim();
+        
+        if (!title) return;
+        
+        const data = await searchShows(title);
+        console.log("Data", data);
+        
+        displayResults(data);
+    } catch(error) {
+        console.error(error);
+        alert(error.message);
+    }
+}
+
+document.querySelector("#results").addEventListener("click", async (event) => {
+  const card = event.target.closest(".movie-card");
+
+  if (!card) return;
+
+  const movie = await getShow(card.dataset.id);
+
+  displayMovie(movie);
+});
