@@ -53,7 +53,7 @@ const options = {
 // };
 
 export async function searchShows(query) {
-  const url = `https://streaming-availability.p.rapidapi.com/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
+  const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
 
   const response = await fetch(url, options);
 
@@ -65,7 +65,7 @@ export async function searchShows(query) {
 }
 
 export async function getShow(id) {
-  const url = `https://streaming-availability.p.rapidapi.com/shows/${id}?output_language=en`;
+  const url = `${apiURL}/shows/${id}?output_language=en`;
 
   const response = await fetch(url, options);
 

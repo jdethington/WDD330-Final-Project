@@ -30,26 +30,27 @@ import { displayMovie, displayResults } from "./MovieList.mjs";
 document.querySelector("#searchBtn").addEventListener("click", search);
 
 async function search() {
-    try {
-        
-        const title = document.querySelector("#searchInput").value.trim();
-        
-        if (!title) return;
-        
-        const data = await searchShows(title);
-        console.log("Data", data);
-        
-        displayResults(data);
-    } catch(error) {
-        console.error(error);
-        alert(error.message);
-    }
+  try {
+    const title = document.querySelector("#searchInput").value.trim();
+
+    if (!title) return;
+
+    const data = await searchShows(title);
+    // console.log("Data", data);
+
+    displayResults(data);
+  } catch (error) {
+    // console.error(error);
+    alert(error.message);
+  }
 }
 
 document.querySelector("#results").addEventListener("click", async (event) => {
   const card = event.target.closest(".movie-card");
 
   if (!card) return;
+
+  card.classList.toggle("flipped");
 
   const movie = await getShow(card.dataset.id);
 

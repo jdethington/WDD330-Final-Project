@@ -33,17 +33,54 @@ export function displayResults(data) {
     card.dataset.id = show.id;
 
     card.innerHTML = `
-        <img
-            src="${show.imageSet.verticalPoster.w240}"
-            alt="${show.title}">
-        <h3>${show.title}</h3>
+        <div class="card-inner">
+
+            <div class="card-front">
+                <img src="${show.imageSet.verticalPoster.w240}" alt="${show.title} poster" loading="lazy">
+            </div>
+
+            <div class="card-back">
+                <h3>${show.title}</h3>
+
+                <p>${show.releaseYear}</p>
+
+                <p>${show.runtime ?? "Unknown"} min</p>
+
+                <p>Rating: ⭐${show.rating}/100</p>
+
+                <button class="btn btn-details">
+                    More Details
+                </button>
+
+            </div>
+
+        </div>
     `;
     container.appendChild(card);
   });
 }
 
 export function displayMovie(movie) {
+  const formatList = (items) =>
+    items
+      ?.slice(0, 5)
+      .map((item) =>
+        typeof item === "string" ? item : item?.name ?? item?.title ?? "",
+      )
+      .filter(Boolean)
+      .join(", ") || "Unavailable";
+
+  const cast = formatList(movie.cast);
+  const genre = formatList(movie.genres);
+  const directors = formatList(movie.directors);
+
+//   console.log("Cast", cast);
+//   console.log("genre", genre);
+//   console.log("directors", directors);
+
   document.querySelector("#details").innerHTML = `
+        <img class="hero-background" src="${movie.imageSet.horizontalBackdrop.w720}" alt="${movie.title} backdrop" loading="lazy">
+        
         <h2>${movie.title}</h2>
 
         <img src="${movie.imageSet.verticalPoster.w480}">
@@ -52,6 +89,9 @@ export function displayMovie(movie) {
 
         <p><strong>Released:</strong> ${movie.releaseYear}</p>
 
-        <p><strong>Runtime:</strong> ${movie.runtime} min</p>
-    `;
+        <p><strong>Genres:</strong> ${genre}</p>
+        <p><strong>Director:</strong> ${directors}</p>
+        <p><strong>Cast:</strong> ${cast}</p>
+        `;
 }
+// <p><strong>Streaming:</strong> ${movie.streamingOptions.us.service.name} min</p>
