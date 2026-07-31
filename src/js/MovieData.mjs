@@ -46,11 +46,6 @@ const options = {
 
 // }
 // =====================================================
-// const headers = {
-//   "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
-//   "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
-//   "Content-Type": "application/json",
-// };
 
 export async function searchShows(query) {
   const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;

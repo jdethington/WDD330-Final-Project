@@ -36,11 +36,11 @@ async function search() {
     if (!title) return;
 
     const data = await searchShows(title);
-    // console.log("Data", data);
+    console.log("Data", data);
 
     displayResults(data);
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     alert(error.message);
   }
 }
