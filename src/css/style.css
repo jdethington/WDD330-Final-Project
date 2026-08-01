@@ -157,6 +157,7 @@ input[type="text"] {
 /* =============================================== */
 main {
   overflow: visible;
+  background-color: var(--background-dark);
 }
 /* =============================================== */
 

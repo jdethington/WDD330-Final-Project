@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movies | List</title>
@@ -13,69 +12,80 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
-        rel="stylesheet" />
-</head>
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <header class="divider" id="main-header"></header>
     <main class="divider">
-        <div class="hero">
-        </div>
+      <div class="hero"></div>
 
-        <section class="movie-lists">
-            <h1>Movie List</h1>
-            <h2><a class="btn btn-favorites" href="/favorites/index.html">Favorites</a></h2>
+      <section class="movie-lists">
+        <h1>Movie List</h1>
+        <h2>
+          <a class="btn btn-favorites" href="/favorites/index.html"
+            >Favorites</a
+          >
+        </h2>
 
-            <input id="searchInput" type="text" placeholder="🔍 Search for a movie">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="🔍 Search for a movie"
+        />
 
-            <button class="btn btn-search" id="searchBtn">
-                Search
-            </button>
+        <button class="btn btn-search" id="searchBtn">Search</button>
 
-            <section class="movie-lists-section">
-                <h2 id="search-name">Search Results</h2>
-                <div class="movies-list" id="search-results">
-                    <div class="movie-card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img src="/images/star-wars-240.jpg" alt="star wars poster" loading="lazy">
-                            </div>
-                            <div class="card-back">
-                                <h3>Star wars</h3>
-                                <p>1997</p>
-                                <p>121 min</p>
-                                <p>Rating: ⭐8.6/100</p>
-                                <div class="btn btn-details"><a href="/moviePage/index.html?id=110">
-                                        More Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movie-card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img src="/images/star-wars-240.jpg" alt="star wars poster" loading="lazy">
-                            </div>
-                            <div class="card-back">
-                                <h3>Star wars</h3>
-                                <p>1997</p>
-                                <p>121 min</p>
-                                <p>Rating: ⭐8.6/100</p>
-                                <div class="btn btn-details"><a href="/moviePage/index.html?id=110">
-                                        More Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+        <section class="movie-lists-section">
+          <h2 id="search-name">Search Results</h2>
+          <div class="movies-list" id="search-results">
+            <div class="movie-card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img
+                    src="/images/star-wars-240.jpg"
+                    alt="star wars poster"
+                    loading="lazy"
+                  />
                 </div>
-            </section>
+                <div class="card-back">
+                  <h3>Star wars</h3>
+                  <p>1997</p>
+                  <p>121 min</p>
+                  <p>Rating: ⭐8.6/100</p>
+                  <div class="btn btn-details">
+                    <a href="/moviePage/index.html?id=110"> More Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="movie-card">
+              <div class="card-inner">
+                <div class="card-front">
+                  <img
+                    src="/images/star-wars-240.jpg"
+                    alt="star wars poster"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-back">
+                  <h3>Star wars</h3>
+                  <p>1997</p>
+                  <p>121 min</p>
+                  <p>Rating: ⭐8.6/100</p>
+                  <div class="btn btn-details">
+                    <a href="/moviePage/index.html?id=110"> More Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
+      </section>
     </main>
     <footer id="main-footer"></footer>
-</body>
-
+  </body>
 </html>

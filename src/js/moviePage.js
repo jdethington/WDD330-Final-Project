@@ -20,7 +20,7 @@ async function search() {
 
     if (!searchTerm) return;
     // Redirect to List page with search term
-    window.location.href = `/movieList/index.html?id=${searchTerm}`
+    window.location.href = `/movieList/index.html?id=${searchTerm}`;
   } catch (error) {
     console.error(error);
     alert(error.message);
