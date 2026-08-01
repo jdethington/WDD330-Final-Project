@@ -23,24 +23,6 @@ if (favorites.length === 0) {
   // movie.init();
 }
 
-// const button = document.querySelector("#searchBtn");
-
-// button.addEventListener("click", async () => {
-//   const id = document.querySelector("#movieId").value;
-
-//   try {
-//     const movie = await getMovie(id);
-
-//     // console.log(movie);
-
-//       displayMovie(movie);
-//     // console.log(movie);
-
-//   } catch (error) {
-//     alert(error.message);
-//   }
-// });
-
 // =====================================================================
 
 document.querySelector("#searchBtn").addEventListener("click", search);
@@ -51,12 +33,7 @@ async function search() {
 
     if (!searchTerm) return;
     // Redirect to List page with search term
-    window.location.href = "/"
-
-    // Returns results in page
-    // const data = await searchShows(searchTerm);
-    // console.log("Data", data);
-    // displayResults(data);
+    window.location.href = `/movieList/index.html?id=${searchTerm}`
   } catch (error) {
     console.error(error);
     alert(error.message);
