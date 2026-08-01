@@ -6,7 +6,7 @@ loadHeaderFooter();
 
 // =====================================================================
 const dataSource = new MovieData();
-const movieId = await getParam("id");
+const movieId = getParam("id");
 const movie = new MovieDetails(movieId, dataSource);
 movie.init();
 
@@ -22,7 +22,7 @@ async function search() {
     // Redirect to List page with search term
     window.location.href = `/movieList/index.html?id=${searchTerm}`;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     alert(error.message);
   }
 }

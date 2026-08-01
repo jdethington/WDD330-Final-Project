@@ -19,7 +19,7 @@ if (favorites.length === 0) {
   const dataSource = new MovieData();
   const listSection = document.querySelector("#favorites");
   const movie = new MovieList(listId, dataSource, listSection);
-  // movie.init();
+  movie.init();
 }
 
 // =====================================================================
@@ -34,7 +34,7 @@ async function search() {
     // Redirect to List page with search term
     window.location.href = `/movieList/index.html?id=${searchTerm}`;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     alert(error.message);
   }
 }
