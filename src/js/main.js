@@ -1,11 +1,27 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import {
+  loadHeaderFooter,
+  getLocalStorage,
+  // setLocalStorage,
+} from "./utils.mjs";
+
+import MovieData from "./MovieData.mjs";
+import MovieList from "./MovieList.mjs";
+
 
 loadHeaderFooter();
 
 // =====================================================================
-import { searchShows, getShow } from "./MovieData.mjs";
-// import { getMovie, searchShows, getShow } from "./MovieData.mjs";
-import { displayMovie, displayResults } from "./MovieList.mjs";
+// Favorite Movies and Shows
+// Get favorites from local storage
+const favorites = getLocalStorage("ML-favorites") || [];
+// If there are no favorites, do not display the favorites section
+if (favorites.length === 0) {
+  const listId = null;
+  const dataSource = new MovieData();
+  const listSection = document.querySelector("#favorites");
+  const movie = new MovieList(listId, dataSource, listSection);
+  // movie.init();
+}
 
 // const button = document.querySelector("#searchBtn");
 
@@ -31,17 +47,18 @@ document.querySelector("#searchBtn").addEventListener("click", search);
 
 async function search() {
   try {
-    const title = document.querySelector("#searchInput").value.trim();
+    const searchTerm = document.querySelector("#searchInput").value.trim();
 
-    if (!title) return;
+    if (!searchTerm) return;
+    // Redirect to List page with search term
+    window.location.href = "/"
 
-    const data = await searchShows(title);
-    console.log("Data", data);
-
-    displayResults(data);
+    // Returns results in page
+    // const data = await searchShows(searchTerm);
+    // console.log("Data", data);
+    // displayResults(data);
   } catch (error) {
     console.error(error);
     alert(error.message);
   }
 }
-

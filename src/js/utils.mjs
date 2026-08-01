@@ -28,7 +28,7 @@ export function getParam(param) {
   const item = urlParams.get(param);
   return item;
 }
-
+// Renders Details of a single movie using a template and a parent element
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
   // if clear is true we need to clear out the contents of the parent.
@@ -36,6 +36,23 @@ export function renderWithTemplate(template, parentElement, data, callback) {
     callback(data);
   }
 }
+// Renders a list of shows using a template function and a parent element
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
+  const htmlStrings = list.map(templateFn);
+  // if clear is true we need to clear out the contents of the parent.
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+
 
 export async function loadTemplate(path) {
   const res = await fetch(path);
@@ -81,4 +98,47 @@ export function alertMessage(message, scroll = true, duration = 3000) {
   setTimeout(() => {
     main.removeChild(alert);
   }, duration);
+}
+
+// Function to display a list items (cast, genres, directors...)
+export function formatList(items) {
+  const formatted = items
+    ?.slice(0, 5)
+    .map((item) =>
+      typeof item === "string" ? item : item?.name ?? item?.title ?? "",
+    )
+    .filter(Boolean)
+    .join(", ");
+
+  return formatted || "Unavailable";
+}
+export function toTitleCase(str) {
+  if (!str) return "";
+  const small = new Set([
+    "a",
+    "an",
+    "and",
+    "as",
+    "at",
+    "but",
+    "by",
+    "for",
+    "in",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "with",
+  ]);
+  return str
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word, i, arr) => {
+      if (i === 0 || i === arr.length - 1 || !small.has(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      return word;
+    })
+    .join(" ");
 }

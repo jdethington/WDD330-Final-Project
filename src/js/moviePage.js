@@ -1,6 +1,5 @@
-import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 import MovieData from "./MovieData.mjs";
-import {} from "./MovieList.mjs";
 import MovieDetails from "./MovieDetails.mjs";
 
 loadHeaderFooter();

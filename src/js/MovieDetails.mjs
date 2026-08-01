@@ -1,3 +1,4 @@
+import { formatList } from "./utils.mjs";
 export default class MovieDetails {
   constructor(movieId, dataSource) {
     this.movieId = movieId;
@@ -79,17 +80,4 @@ function movieDetailsTemplate(movie) {
             </div>
         </section>
     `;
-}
-
-// Function to display a list items (cast, genres, directors...)
-function formatList(items) {
-  const formatted = items
-    ?.slice(0, 5)
-    .map((item) =>
-      typeof item === "string" ? item : item?.name ?? item?.title ?? "",
-    )
-    .filter(Boolean)
-    .join(", ");
-
-  return formatted || "Unavailable";
 }

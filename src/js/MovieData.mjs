@@ -25,7 +25,7 @@ export default class MovieData {
   constructor() {}
 
   async searchShows(query) {
-    const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
+    const url = `${apiURL}/shows/search/title?title=${query}&country=us&show_type=movie&output_language=en`;
 
     const response = await fetch(url, options);
 
@@ -34,7 +34,7 @@ export default class MovieData {
     }
     const data = await convertToJson(response);
 
-    return data.Results;
+    return data;
   }
 
   async getMovieById(id) {
