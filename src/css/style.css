@@ -5,7 +5,7 @@
   /* --primary-color: #f0a868; */
   /* --secondary-color: #525b0f; */
   /* --tertiary-color: #8a470c; */
-  --light-grey: #d0d0d0;
+  --light-grey: #f0f0f0;
   --dark-grey: #303030;
 
   --primary: #2563eb;
@@ -117,16 +117,6 @@ input[type="text"] {
 }
 
 /* button { */
-.btn-search {
-  padding: 0.5em 2em;
-  background-color: var(--secondary);
-  color: white;
-  margin: auto;
-  display: block;
-  border: 0;
-  font-size: var(--large-font);
-  cursor: pointer;
-}
 .btn {
   display: inline-flex;
   align-items: center;
@@ -140,15 +130,35 @@ input[type="text"] {
   border: 2px solid transparent;
   cursor: pointer;
 }
+
+.btn-search {
+  background-color: var(--secondary);
+  color: white;
+  margin: auto;
+}
 .btn-details {
   border: var(--light-grey);
   background-color: var(--light-grey);
   color: var(--secondary);
+
+  a {
+    text-decoration: none;
+    color: var(--secondary);
+  }
+}
+.btn-favorites {
+  background-color: var(--primary);
+  color: var(--light-grey);
 }
 
 .divider {
   border-bottom: 2px solid var(--primary);
 }
+/* =============================================== */
+main {
+  overflow: visible;
+}
+/* =============================================== */
 
 /* End utility classes */
 
@@ -248,7 +258,189 @@ input[type="text"] {
 
 /* End movie list card */
 
-@media screen and (min-width: 500px) {
+/* ========== Movie Details Page ========== */
+.movie-details {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.movie-hero {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: var(--secondary);
+}
+
+.hero-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.hero-overlay {
+  /* makes the hero image less noticeable */
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(18, 47, 77, 0.95) 0%,
+    /* rgba(18, 47, 77, 0.4) 50%, */ rgba(18, 47, 77, 0.45) 45%,
+    rgba(18, 47, 77, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.movie-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0rem 1rem 2rem;
+  max-width: 1080px;
+  margin: -5rem auto 0;
+  overflow: visible;
+}
+
+.movie-poster-wrap {
+  flex-shrink: 0;
+  width: 160px;
+  /* margin: -4rem auto 0;
+  position: relative;
+  z-index: 2; */
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: block;
+  background: var(--secondary);
+}
+
+.movie-info {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  background: var(--background-light);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.movie-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-headline);
+  font-size: clamp(1.4rem, 4.5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.movie-overview {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  padding: 0 0 1.15rem;
+  margin: 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.movie-meta {
+  margin: 1.15rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+}
+
+.meta-row dt {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--secondary);
+  margin: 0;
+}
+
+.meta-row dd {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+/* Movie details — tablet & up */
+@media screen and (min-width: 600px) {
+  .movie-hero {
+    height: 340px;
+  }
+
+  .movie-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.75rem;
+    margin-top: -6rem;
+    padding: 0 1.5rem 2.5rem;
+  }
+
+  .movie-poster-wrap {
+    width: 220px;
+    /* margin: -5rem 0 0; */
+  }
+
+  /* .movie-title {
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+  } */
+
+  /* .movie-overview {
+    padding-top: 1.5rem;
+  } */
+  .movie-info {
+    padding: 1.5rem;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .movie-hero {
+    height: 400px;
+  }
+
+  .movie-content {
+    margin-top: -7rem;
+    gap: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .movie-poster-wrap {
+    width: 240px;
+    /* margin-top: -6rem; */
+  }
+  .movie-info {
+    margin-top: 4rem;
+  }
+  .meta-row {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
+@media screen and (min-width: 600px) {
   body {
     max-width: 1080px;
     margin: auto;

@@ -45,14 +45,3 @@ async function search() {
   }
 }
 
-document.querySelector("#results").addEventListener("click", async (event) => {
-  const card = event.target.closest(".movie-card");
-
-  if (!card) return;
-
-  card.classList.toggle("flipped");
-
-  const movie = await getShow(card.dataset.id);
-
-  displayMovie(movie);
-});

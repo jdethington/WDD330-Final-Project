@@ -48,9 +48,9 @@ export function displayResults(data) {
 
                 <p>Rating: ⭐${show.rating}/100</p>
 
-                <button class="btn btn-details">
-                    More Details
-                </button>
+                <div class="btn btn-details"><a href="/moviePage/index.html?id=${show.id}">
+                    More Details</a>
+                </div>
 
             </div>
 
@@ -74,9 +74,9 @@ export function displayMovie(movie) {
   const genre = formatList(movie.genres);
   const directors = formatList(movie.directors);
 
-//   console.log("Cast", cast);
-//   console.log("genre", genre);
-//   console.log("directors", directors);
+  //   console.log("Cast", cast);
+  //   console.log("genre", genre);
+  //   console.log("directors", directors);
 
   document.querySelector("#details").innerHTML = `
         <img class="hero-background" src="${movie.imageSet.horizontalBackdrop.w720}" alt="${movie.title} backdrop" loading="lazy">

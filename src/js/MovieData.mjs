@@ -2,6 +2,15 @@
 const apiURL = import.meta.env.VITE_API_URL;
 const apiKEY = import.meta.env.VITE_API_KEY;
 // ===================================================== start
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
+  if (res.ok) {
+    return jsonResponse;
+  } else {
+    throw { name: "servicesError", message: jsonResponse };
+  }
+}
+
 // =============== API options =========================
 const options = {
   method: "GET",
@@ -11,6 +20,39 @@ const options = {
     "Content-Type": "application/json",
   },
 };
+
+export default class MovieData {
+  constructor() {}
+
+  async searchShows(query) {
+    const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
+
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error("Search failed.");
+    }
+    const data = await convertToJson(response);
+
+    return data.Results;
+  }
+
+  async getMovieById(id) {
+    const newId = id || "110";
+    const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
+
+    const response = await fetch(url, options);
+    console.log("Response: ", response);
+
+    if (!response.ok) {
+      throw new Error("Unable to load movie.");
+    }
+    const data = await convertToJson(response);
+    console.log("Response json: ", data);
+
+    return data;
+  }
+}
 // =====================================================
 // get information on 1 movie
 // export async function getMovie(id) {
@@ -60,7 +102,8 @@ export async function searchShows(query) {
 }
 
 export async function getShow(id) {
-  const url = `${apiURL}/shows/${id}?output_language=en`;
+  const newId = id || "110";
+  const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
 
   const response = await fetch(url, options);
 
