@@ -1,20 +1,27 @@
 <div class="logo">
   <img src="/images/play-circle.svg" alt="play image for logo" />
-  <a href="./index.html"> Find<span class="highlight">Movie</span></a>
+  <a href="../../index.html"> Find<span class="highlight">Movie</span></a>
 </div>
 <div class="search">
   <!-- <div><img src="/images/search.svg" alt="search icon" class="search-logo" /></div> -->
   <!-- <input class="search-text" autocomplete="off" autocorrect="off" maxlength="100"
         placeholder="🔍 What do you want to watch? " enterkeyhint="search" inputmode="search" rows="1"
         spellcheck="false" type="search" value="" /> -->
-  <div>
+  <!-- <div>
     <label class="search-label" for="search">What do you want to watch?</label>
-    <input
-      type="search"
-      name="search"
-      id="search"
-      class="search-text"
-      placeholder="🔍 What do you want to watch? "
-    />
-  </div>
+    <input type="search" name="search" id="search" class="search-text" placeholder="🔍 What do you want to watch? " />
+  </div> -->
+
+  <h2 class="btn">
+    <a class="btn btn-favorites" href="/movieList/index.html">Favorites</a>
+  </h2>
+
+  <!-- <input id="searchInput" type="text" placeholder="🔍 Search for a movie" />
+
+  <button class="btn btn-search" id="searchBtn">Search</button> -->
+
+  <form action="/movieList/index.html">
+    <input type="text" placeholder="Search.." name="id" />
+    <button type="submit" class="btn btn-search">Search</button>
+  </form>
 </div>

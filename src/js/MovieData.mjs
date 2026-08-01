@@ -11,6 +11,21 @@ async function convertToJson(res) {
   }
 }
 
+// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
+// import * as streamingAvailability from "streaming-availability";
+
+// const API_KEY = apiKEY;
+// const client = new streamingAvailability.Client(
+//   new streamingAvailability.Configuration({
+//     apiKey: API_KEY,
+//   }),
+// );
+// const movieOfTheNightData = await client.showsApi.getShow({
+//   id: "tt0068646",
+// });
+// console.log(movieOfTheNightData);
+// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
+
 // =============== API options =========================
 const options = {
   method: "GET",

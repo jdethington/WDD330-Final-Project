@@ -14,7 +14,7 @@ loadHeaderFooter();
 // Get favorites from local storage
 const favorites = getLocalStorage("ML-favorites") || [];
 // If there are no favorites, do not display the favorites section
-if (favorites.length === 0) {
+if (favorites.length > 0) {
   const listId = null;
   const dataSource = new MovieData();
   const listSection = document.querySelector("#favorites");
@@ -24,18 +24,18 @@ if (favorites.length === 0) {
 
 // =====================================================================
 // Need to move this into a shared mjs file
-document.querySelector("#searchBtn").addEventListener("click", search);
+// document.querySelector("#searchBtn").addEventListener("click", search);
 
-async function search() {
-  try {
-    const searchTerm = document.querySelector("#searchInput").value.trim();
+// async function search() {
+//   try {
+//     const searchTerm = document.querySelector("#searchInput").value.trim();
 
-    if (!searchTerm) return;
-    // Redirect to List page with search term
-    window.location.href = `/movieList/index.html?id=${searchTerm}`;
-  } catch (error) {
-    // console.error(error);
-    alert(error.message);
-  }
-}
+//     if (!searchTerm) return;
+//     // Redirect to List page with search term
+//     window.location.href = `/movieList/index.html?id=${searchTerm}`;
+//   } catch (error) {
+//     // console.error(error);
+//     alert(error.message);
+//   }
+// }
 // =====================================================================
