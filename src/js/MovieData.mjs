@@ -89,27 +89,27 @@ export default class MovieData {
 // }
 // =====================================================
 
-export async function searchShows(query) {
-  const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
+// export async function searchShows(query) {
+//   const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
 
-  const response = await fetch(url, options);
+//   const response = await fetch(url, options);
 
-  if (!response.ok) {
-    throw new Error("Search failed.");
-  }
+//   if (!response.ok) {
+//     throw new Error("Search failed.");
+//   }
 
-  return await response.json();
-}
+//   return await response.json();
+// }
 
-export async function getShow(id) {
-  const newId = id || "110";
-  const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
+// export async function getShow(id) {
+//   const newId = id || "110";
+//   const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
 
-  const response = await fetch(url, options);
+//   const response = await fetch(url, options);
 
-  if (!response.ok) {
-    throw new Error("Unable to load movie.");
-  }
+//   if (!response.ok) {
+//     throw new Error("Unable to load movie.");
+//   }
 
-  return await response.json();
-}
+//   return await response.json();
+// }

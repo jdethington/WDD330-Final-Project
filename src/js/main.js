@@ -24,7 +24,7 @@ if (favorites.length === 0) {
 }
 
 // =====================================================================
-
+// Need to move this into a shared mjs file
 document.querySelector("#searchBtn").addEventListener("click", search);
 
 async function search() {
@@ -39,3 +39,4 @@ async function search() {
     alert(error.message);
   }
 }
+// =====================================================================
