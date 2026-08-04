@@ -7,7 +7,7 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key)) || [];
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
@@ -112,6 +112,35 @@ export function formatList(items) {
 
   return formatted || "Unavailable";
 }
+// 
+export function streamingServices(movie){
+  const services = [
+    ...new Map(
+      movie.streamingOptions.us.map((option) => [
+        option.service.id,
+        option.service,
+      ]),
+    ).values(),
+  ];
+  console.log(services);
+
+  const serviceHTML = services
+    .map(
+      (service) => `
+        <a href="${service.homePage}" target="_blank">
+          <img
+              class="service-logo"
+              src="${service.imageSet.lightThemeImage}"
+              alt="${service.name}"
+              title="${service.name}">
+        </a>
+    `,
+    )
+    .join("");
+
+  return serviceHTML;
+}
+
 export function toTitleCase(str) {
   if (!str) return "";
   const small = new Set([

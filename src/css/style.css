@@ -148,8 +148,13 @@ input[type="text"] {
   }
 }
 .btn-favorites {
+  display: flex;
   background-color: var(--primary);
   color: var(--light-grey);
+  a {
+    text-decoration: none;
+    color: var(--light-grey);
+  }
 }
 
 .divider {
@@ -366,7 +371,7 @@ main {
   display: grid;
   grid-template-columns: 90px 1fr;
   gap: 0.5rem 1rem;
-  align-items: baseline;
+  align-items: center;
 }
 
 .meta-row dt {
@@ -382,6 +387,21 @@ main {
   margin: 0;
   color: var(--text);
   line-height: 1.45;
+}
+.meta-streaming {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+}
+.service-logo {
+  max-height: 44px;
+  width: auto;
+  text-decoration: none;
+  transition: transform 0.25s;
+}
+
+.service-logo:hover {
+  transform: scale(1.25);
 }
 
 /* Movie details — tablet & up */

@@ -1,5 +1,7 @@
 // ********************************************************
+import { isFavorite } from "./Favorites.mjs";
 import { toTitleCase } from "./utils.mjs";
+
 export default class MovieList {
   constructor(searchQuery, dataSource, listSection) {
     this.searchQuery = searchQuery; // Search term passed in the URL query string.
@@ -12,8 +14,8 @@ export default class MovieList {
     // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
     this.movies = await this.dataSource.searchShows(this.searchQuery);
     // the Movie details are needed before rendering the HTML
-    console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    console.log("MovieList.mjs", this.movies);
+    // console.log("MovieList.mjs SearchQuery", this.searchQuery);
+    // console.log("MovieList.mjs", this.movies);
     this.renderMovieList(this.movies);
     // this.renderList(this.movies);
 
@@ -21,10 +23,9 @@ export default class MovieList {
     // Set the title for the browser tab ===========================================
     if (title !== null) {
       document.title = `Movies | ${toTitleCase(title)}`;
-      // const search = document.querySelector("#search-name");
-      // search.innerHTML = `Search Results for: ${toTitleCase(title)}`;
     }
   }
+
   renderMovieList(movieList) {
     renderListWithTemplate(
       movieCardTemplate,
@@ -34,8 +35,10 @@ export default class MovieList {
       false,
     );
   }
+
 }
-// =======================
+
+// ======================================================================================
 function renderListWithTemplate(
   templateCard,
   parentElement,
@@ -60,6 +63,7 @@ function renderListWithTemplate(
     container.appendChild(card);
   });
 }
+
 // Template for each card
 function movieCardTemplate(movie) {
   const poster =
@@ -70,23 +74,28 @@ function movieCardTemplate(movie) {
   const rating = movie.rating ?? "N/A";
   const releaseYear = movie.releaseYear ?? "Unknown";
   const title = movie.title || "No Title Found";
+  const buttonText = isFavorite(movie.id) ? "Remove Favorite" : "Add Favorite";
 
   return `
-        <div class="card-inner">
-            <div class="card-front">
-                <img src="${poster}" alt="${title} poster" loading="lazy">
-            </div>
-            <div class="card-back">
-                <h3>${title}</h3>
-                <p>${releaseYear}</p>
-                <p>${runtime} min</p>
-                <p>Rating: ⭐${rating}/100</p>
-                <div class="btn btn-details"><a href="/moviePage/index.html?id=${movie.id}">
-                    More Details</a>
-                </div>
-            </div>
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="${poster}" alt="${title} poster" loading="lazy">
+      </div>
+      <div class="card-back">
+        <h3>${title}</h3>
+        <p>${releaseYear}</p>
+        <p>${runtime} min</p>
+        <p>Rating: ⭐${rating}/100</p>
+        <div class="btn btn-details"><a href="/moviePage/index.html?id=${movie.id}">
+          More Details</a>
         </div>
-    `;
+        <button class=" btn favorite-btn">
+          ${buttonText}
+        </button>
+      </div>
+    </div>
+  `;
+
 }
 
 // function movieListTemplate(movies) {

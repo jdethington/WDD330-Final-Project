@@ -13,6 +13,5 @@ loadHeaderFooter();
 // movieList.init();
 
 // =====================================================================
-// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
-// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
+
 // =====================================================================

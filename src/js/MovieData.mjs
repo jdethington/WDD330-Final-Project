@@ -2,31 +2,8 @@
 const apiURL = import.meta.env.VITE_API_URL;
 const apiKEY = import.meta.env.VITE_API_KEY;
 // ===================================================== start
-async function convertToJson(res) {
-  const jsonResponse = await res.json();
-  if (res.ok) {
-    return jsonResponse;
-  } else {
-    throw { name: "servicesError", message: jsonResponse };
-  }
-}
 
-// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
-// import * as streamingAvailability from "streaming-availability";
-
-// const API_KEY = apiKEY;
-// const client = new streamingAvailability.Client(
-//   new streamingAvailability.Configuration({
-//     apiKey: API_KEY,
-//   }),
-// );
-// const movieOfTheNightData = await client.showsApi.getShow({
-//   id: "tt0068646",
-// });
-// console.log(movieOfTheNightData);
-// =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
-
-// =============== API options =========================
+// =============== Rapid API options =========================
 const options = {
   method: "GET",
   headers: {
@@ -38,6 +15,17 @@ const options = {
 
 export default class MovieData {
   constructor() {}
+
+  // async trendingMovies() {
+  //   const trendingMovies = await fetch(
+  //     "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
+  //     options,
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.error(err));
+  //   return trendingMovies;
+  // }
 
   async searchShows(query) {
     const url = `${apiURL}/shows/search/title?title=${query}&country=us&show_type=movie&output_language=en`;
@@ -68,6 +56,16 @@ export default class MovieData {
     return data;
   }
 }
+
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
+  if (res.ok) {
+    return jsonResponse;
+  } else {
+    throw { name: "servicesError", message: jsonResponse };
+  }
+}
+
 // =====================================================
 // get information on 1 movie
 // export async function getMovie(id) {

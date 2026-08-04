@@ -7,6 +7,8 @@ https://github.com/jdethington/WDD330-Final-Project
 Render.com site:
 https://wdd330-final-project-bg8o.onrender.com
 
+Trello board:
+https://trello.com/b/RuOzyH8A
 
 
 ### Common Workflow Commands
