@@ -1,4 +1,9 @@
-import { formatList, streamingServices } from "./utils.mjs";
+import {
+  formatList,
+  streamingServices,
+  getLocalStorage,
+  STORAGE_KEY,
+} from "./utils.mjs";
 import { isFavorite, toggleFavorite } from "./Favorites.mjs";
 
 export default class MovieDetails {
@@ -8,8 +13,16 @@ export default class MovieDetails {
     this.dataSource = dataSource;
   }
   async init() {
-    // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
-    this.movie = await this.dataSource.getMovieById(this.movieId);
+    // Determine if movie info is stored as Favorite
+    if (isFavorite(this.movieId)) {
+      const favorites = await getLocalStorage(STORAGE_KEY);
+      const movieLS = favorites.find((movie) => movie.id == this.movieId);
+      console.log(movieLS);
+      this.movie = movieLS || {};
+    } else {
+      // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
+      this.movie = await this.dataSource.getMovieById(this.movieId);
+    }
     // the Movie details are needed before rendering the HTML
     // console.log(this.movie);
     this.renderMovieDetails();
@@ -30,7 +43,6 @@ export default class MovieDetails {
   attachFavoriteListener() {
     const button = document.querySelector(".isFavorite");
     if (!button) return;
-    
 
     button.addEventListener("click", () => {
       toggleFavorite(this.movie);
@@ -49,6 +61,7 @@ function movieDetailsTemplate(movie) {
   const cast = formatList(movie.cast);
   const genre = formatList(movie.genres);
   const directors = formatList(movie.directors);
+  // const streaming = "Movie";
   const streaming = streamingServices(movie);
   // const favorite = "Add to Favorite"
   const favorite = isFavorite(movie.id) ? "Remove Favorite" : "Add Favorite";

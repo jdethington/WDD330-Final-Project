@@ -31,7 +31,7 @@ export default class MovieList {
       this.listSection,
       movieList,
       "afterbegin",
-      false,
+      true,
     );
   }
 }
