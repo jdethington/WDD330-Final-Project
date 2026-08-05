@@ -1,5 +1,5 @@
 // ********************************************************
-import { isFavorite } from "./Favorites.mjs";
+import { isFavorite, toggleFavorite } from "./Favorites.mjs";
 import { renderListWithTemplate, toTitleCase } from "./utils.mjs";
 
 export default class MovieList {
@@ -33,6 +33,19 @@ export default class MovieList {
       "afterbegin",
       true,
     );
+
+    this.listSection
+      .querySelectorAll(".favorite-btn")
+      .forEach((button, index) => {
+        const movie = movieList[index];
+        if (!movie) return;
+
+        button.addEventListener("click", (e) => {
+          const isNowFavorite = toggleFavorite(movie);
+          button.textContent = isNowFavorite ? "☑️ Favorite" : "Add Favorite";
+          e.stopPropagation();
+        });
+      });
   }
 }
 
@@ -71,7 +84,7 @@ export function movieCardTemplate(movie) {
   const rating = movie.rating ?? "N/A";
   const releaseYear = movie.releaseYear ?? "Unknown";
   const title = movie.title || "No Title Found";
-  const buttonText = isFavorite(movie.id) ? "Remove Favorite" : "Add Favorite";
+  const buttonText = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
 
   return `
     <div class="card-inner">

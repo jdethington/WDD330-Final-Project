@@ -16,7 +16,7 @@ export default class Favorites {
     // get movies from local storage
     this.movies = await getLocalStorage(STORAGE_KEY);
     // console.log("List Selection: ", this.listSelection);
-    console.log("Favorites: ", this.movies);
+    // console.log("Favorites: ", this.movies);
     if (this.movies) {
       this.renderMovieList(this.movies);
     }
@@ -29,6 +29,24 @@ export default class Favorites {
       "afterbegin",
       true,
     );
+
+    this.listSelection
+      .querySelectorAll(".favorite-btn")
+      .forEach((button, index) => {
+        const movie = movieList[index];
+        if (!movie) return;
+
+        button.addEventListener("click", () => {
+          const isNowFavorite = toggleFavorite(movie);
+          if (!isNowFavorite) {
+            const card = button.closest(".movie-card");
+            card?.remove();
+            return;
+          }
+
+          button.textContent = "☑️ Favorite";
+        });
+      });
   }
 }
 
@@ -59,26 +77,13 @@ export function removeFavorite(id) {
 }
 
 export function toggleFavorite(movie) {
-  //   const favoriteMovie = {
-  //     id: movie.id,
-  //     title: movie.title,
-  //     overview: movie.overview,
-  //     releaseYear: movie.releaseYear,
-  //     genres: movie.genres,
-  //     directors: movie.directors,
-  //     cast: movie.cast,
-  //     rating: movie.rating,
-  //     runtime: movie.runtime,
-  //     poster: movie.imageSet.verticalPoster.w240,
-  //     backdrop: movie.imageSet.horizontalBackdrop.w1080,
-  //     streamingOptions: movie.streamingOptions.us,
-  //   };
   if (isFavorite(movie.id)) {
     removeFavorite(movie.id);
-  } else {
-    addFavorite(movie);
-    // addFavorite(favoriteMovie);
+    return false;
   }
+
+  addFavorite(movie);
+  return true;
 }
 
 // =====================================================================

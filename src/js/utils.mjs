@@ -64,8 +64,6 @@ export function renderListWithTemplate(
   });
 }
 
-
-
 export async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
@@ -124,8 +122,12 @@ export function formatList(items) {
 
   return formatted || "Unavailable";
 }
-// 
-export function streamingServices(movie){
+//
+export function streamingServices(movie) {
+  // console.log("PreMap", movie.streamingOptions.us);
+  if (!movie.streamingOptions.us) {
+    return [];
+  }
   const services = [
     ...new Map(
       movie.streamingOptions.us.map((option) => [
@@ -134,7 +136,7 @@ export function streamingServices(movie){
       ]),
     ).values(),
   ];
-  console.log(services);
+  // console.log("Streaming", services);
 
   const serviceHTML = services
     .map(
