@@ -9,16 +9,17 @@ import { movieCardTemplate } from "./MovieList.mjs";
 export default class Favorites {
   constructor() {
     this.movies = [];
-    this.listSelection = document.querySelector("#results");
+    this.listSelection = document.querySelector("#favorites");
   }
 
   async init() {
     // get movies from local storage
     this.movies = await getLocalStorage(STORAGE_KEY);
-    // the Movie details are needed before rendering the HTML
     // console.log("List Selection: ", this.listSelection);
-    // console.log("Favorites: ", this.movies);
-    this.renderMovieList(this.movies);
+    console.log("Favorites: ", this.movies);
+    if (this.movies) {
+      this.renderMovieList(this.movies);
+    }
   }
   renderMovieList(movieList) {
     renderListWithTemplate(
@@ -26,7 +27,7 @@ export default class Favorites {
       this.listSelection,
       movieList,
       "afterbegin",
-      false,
+      true,
     );
   }
 }
@@ -56,7 +57,6 @@ export function removeFavorite(id) {
   );
   setLocalStorage(STORAGE_KEY, movieList);
 }
-
 
 export function toggleFavorite(movie) {
   //   const favoriteMovie = {
