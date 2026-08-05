@@ -49,7 +49,6 @@ export function renderListWithTemplate(
 ) {
   const container = parentElement;
   if (clear) {
-    // parentElement.innerHTML = "";
     container.innerHTML = "";
   }
 

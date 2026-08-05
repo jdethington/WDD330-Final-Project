@@ -50,30 +50,6 @@ export default class MovieList {
 }
 
 // ======================================================================================
-// export function renderListWithTemplate(
-//   templateCard,
-//   parentElement,
-//   movies,
-//   position,
-//   clear = false,
-// ) {
-//   const container = parentElement;
-//   if (clear) {
-//     // parentElement.innerHTML = "";
-//     container.innerHTML = "";
-//   }
-
-//   movies.forEach((movie) => {
-//     const card = document.createElement("div");
-
-//     card.className = "movie-card";
-//     card.dataset.id = movie.id;
-
-//     card.innerHTML = templateCard(movie);
-//     container.appendChild(card);
-//   });
-// }
-
 // Template for each card
 export function movieCardTemplate(movie) {
   const poster =

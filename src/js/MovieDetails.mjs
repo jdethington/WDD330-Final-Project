@@ -26,13 +26,17 @@ export default class MovieDetails {
     // console.log(this.movie);
     this.renderMovieDetails();
 
-    // Set the page title with the title of the movie
+    // Set the title for the browser tab ===========================================
     const title = this.movie?.title || "Movie";
     document.title = `Movies | ${title}`;
+    const h1 = document.querySelector("h1");
+    h1.innerText = title;
   }
 
   renderMovieDetails() {
-    const mainElement = document.querySelector("main");
+    // const mainElement = document.querySelector("main");
+    const mainElement = document.querySelector("#show");
+    mainElement.innerHTML = "";
     if (mainElement) {
       mainElement.innerHTML = movieDetailsTemplate(this.movie);
       this.attachFavoriteListener();
