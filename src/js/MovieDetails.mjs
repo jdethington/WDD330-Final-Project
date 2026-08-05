@@ -1,5 +1,5 @@
 import { formatList, streamingServices } from "./utils.mjs";
-import { isFavorite } from "./favorites.js";
+import { isFavorite, toggleFavorite } from "./Favorites.mjs";
 
 export default class MovieDetails {
   constructor(movieId, dataSource) {
@@ -11,7 +11,7 @@ export default class MovieDetails {
     // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
     this.movie = await this.dataSource.getMovieById(this.movieId);
     // the Movie details are needed before rendering the HTML
-    console.log(this.movie);
+    // console.log(this.movie);
     this.renderMovieDetails();
 
     // Set the page title with the title of the movie
@@ -23,14 +23,28 @@ export default class MovieDetails {
     const mainElement = document.querySelector("main");
     if (mainElement) {
       mainElement.innerHTML = movieDetailsTemplate(this.movie);
+      this.attachFavoriteListener();
     }
+  }
+
+  attachFavoriteListener() {
+    const button = document.querySelector(".isFavorite");
+    if (!button) return;
+    
+
+    button.addEventListener("click", () => {
+      toggleFavorite(this.movie);
+      button.textContent = isFavorite(this.movie.id)
+        ? "Remove Favorite"
+        : "Add Favorite";
+    });
   }
 }
 
 // Return a template for the movie to be displayed
 function movieDetailsTemplate(movie) {
   console.log("Movie: ", movie);
-  
+
   const title = movie.title || "No Title Found";
   const cast = formatList(movie.cast);
   const genre = formatList(movie.genres);
@@ -86,7 +100,7 @@ function movieDetailsTemplate(movie) {
             <dd class="meta-streaming">${streaming}</dd>
             </div>
           </dl>
-          <button class="btn btn-favorites">
+          <button class="btn btn-favorites isFavorite">
             ${favorite}
           </button>
         </div>
