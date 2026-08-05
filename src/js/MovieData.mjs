@@ -4,67 +4,92 @@ const apiKEY = import.meta.env.VITE_API_KEY;
 // ===================================================== start
 
 // =============== Rapid API options =========================
-const options = {
-  method: "GET",
-  headers: {
-    "x-rapidapi-key": apiKEY,
-    "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
-    "Content-Type": "application/json",
-  },
-};
+// const options = {
+//   method: "GET",
+//   headers: {
+//     "x-rapidapi-key": apiKEY,
+//     "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
+//     "Content-Type": "application/json",
+//   },
+// };
+// =============== Rapid API options =========================
+
+//  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
+import * as streamingAvailability from "streaming-availability";
+
+const API_KEY = apiKEY;
+const client = new streamingAvailability.Client(
+  new streamingAvailability.Configuration({
+    apiKey: API_KEY,
+  }),
+);
+
+// const movieOfTheNightData = await client.showsApi.getShow({
+//   id: "tt0068646",
+// });
+// console.log(movieOfTheNightData);
+//  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
 
 export default class MovieData {
   constructor() {}
-
-  // async trendingMovies() {
-  //   const trendingMovies = await fetch(
-  //     "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
-  //     options,
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.error(err));
-  //   return trendingMovies;
-  // }
+  //  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
 
   async searchShows(query) {
-    const url = `${apiURL}/shows/search/title?title=${query}&country=us&show_type=movie&output_language=en`;
-
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      throw new Error("Search failed.");
-    }
-    const data = await convertToJson(response);
-
+    const data = await client.showsApi.searchShowsByTitle({
+      title: query,
+      country: "us",
+    });
+    console.log("Movie-Title",data);
     return data;
   }
 
   async getMovieById(id) {
-    const newId = id || "110";
-    const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
-
-    const response = await fetch(url, options);
-    console.log("Response: ", response);
-
-    if (!response.ok) {
-      throw new Error("Unable to load movie.");
-    }
-    const data = await convertToJson(response);
-    console.log("Response json: ", data);
-
-    return data;
+    const movieOfTheNightData = await client.showsApi.getShow({
+      id: "tt0068646",
+    });
+    console.log(movieOfTheNightData);
+    return movieOfTheNightData;
   }
+
+  // ********************************************************* Rapid API ************************************************************
+  // async searchShows(query) {
+  //   const url = `${apiURL}/shows/search/title?title=${query}&country=us&show_type=movie&output_language=en`;
+
+  //   const response = await fetch(url, options);
+
+  //   if (!response.ok) {
+  //     throw new Error("Search failed.");
+  //   }
+  //   const data = await convertToJson(response);
+
+  //   return data;
+  // }
+
+  // async getMovieById(id) {
+  //   const newId = id || "110";
+  //   const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
+
+  //   const response = await fetch(url, options);
+  //   console.log("Response: ", response);
+
+  //   if (!response.ok) {
+  //     throw new Error("Unable to load movie.");
+  //   }
+  //   const data = await convertToJson(response);
+  //   console.log("Response json: ", data);
+
+  //   return data;
+  // }
 }
 
-async function convertToJson(res) {
-  const jsonResponse = await res.json();
-  if (res.ok) {
-    return jsonResponse;
-  } else {
-    throw { name: "servicesError", message: jsonResponse };
-  }
-}
+// async function convertToJson(res) {
+//   const jsonResponse = await res.json();
+//   if (res.ok) {
+//     return jsonResponse;
+//   } else {
+//     throw { name: "servicesError", message: jsonResponse };
+//   }
+// }
 
 // =====================================================
 // get information on 1 movie

@@ -6,7 +6,7 @@ export function qs(selector, parent = document) {
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
 // const STORAGE_KEY = "Movie-favorites";
-export const STORAGE_KEY = "MF-favorites";
+export const STORAGE_KEY = "FM-favorites";
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
