@@ -38,18 +38,27 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 }
 // Renders a list of shows using a template function and a parent element
 export function renderListWithTemplate(
-  templateFn,
+  templateCard,
   parentElement,
-  list,
-  position = "afterbegin",
+  movies,
+  position,
   clear = false,
 ) {
-  const htmlStrings = list.map(templateFn);
-  // if clear is true we need to clear out the contents of the parent.
+  const container = parentElement;
   if (clear) {
-    parentElement.innerHTML = "";
+    // parentElement.innerHTML = "";
+    container.innerHTML = "";
   }
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+
+  movies.forEach((movie) => {
+    const card = document.createElement("div");
+
+    card.className = "movie-card";
+    card.dataset.id = movie.id;
+
+    card.innerHTML = templateCard(movie);
+    container.appendChild(card);
+  });
 }
 
 

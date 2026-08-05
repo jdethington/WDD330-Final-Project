@@ -1,6 +1,5 @@
 import { loadHeaderFooter } from "./utils.mjs";
-// import MovieData from "./MovieData.mjs";
-// import MovieList from "./MovieList.mjs";
+import FavoritesStored from "./Favorites.mjs";
 
 loadHeaderFooter();
 
@@ -13,5 +12,6 @@ loadHeaderFooter();
 // movieList.init();
 
 // =====================================================================
-
+const favoriteMovies = new FavoritesStored();
+favoriteMovies.init();
 // =====================================================================

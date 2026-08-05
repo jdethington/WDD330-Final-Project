@@ -12,7 +12,7 @@ loadHeaderFooter();
 // =====================================================================
 // Favorite Movies and Shows
 // Get favorites from local storage
-const favorites = getLocalStorage("ML-favorites") || [];
+const favorites = getLocalStorage("Movie-favorites") || [];
 // If there are no favorites, do not display the favorites section
 if (favorites.length > 0) {
   const listId = null;

@@ -1,6 +1,38 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import {
+  renderListWithTemplate,
+  getLocalStorage,
+  setLocalStorage,
+} from "./utils.mjs";
+import { movieCardTemplate } from "./MovieList.mjs";
+
+export default class FavoritesStored {
+  constructor() {
+    this.movies = [];
+    this.listSelection = document.querySelector("#results");
+  }
+
+  async init() {
+    // get movies from local storage
+    this.movies = await getLocalStorage(STORAGE_KEY);
+    // the Movie details are needed before rendering the HTML
+    // console.log("List Selection: ", this.listSelection);
+    // console.log("Favorites: ", this.movies);
+    this.renderMovieList(this.movies);
+  }
+  renderMovieList(movieList) {
+    renderListWithTemplate(
+      movieCardTemplate,
+      this.listSelection,
+      movieList,
+      "afterbegin",
+      false,
+    );
+  }
+}
 
 // =====================================================================
+
+// const STORAGE_KEY = "Movie-favorites";
 const STORAGE_KEY = "MF-favorites";
 
 export function isFavorite(id) {
@@ -29,7 +61,7 @@ export function toggleFavorite(movie) {
     id: movie.id,
     title: movie.title,
     overview: movie.overview,
-    year: movie.releaseYear,
+    releaseYear: movie.releaseYear,
     genres: movie.genres,
     directors: movie.directors,
     cast: movie.cast,
@@ -42,7 +74,8 @@ export function toggleFavorite(movie) {
   if (isFavorite(movie.id)) {
     removeFavorite(movie.id);
   } else {
-    addFavorite(favoriteMovie);
+    addFavorite(movie);
+    // addFavorite(favoriteMovie);
   }
 }
 
