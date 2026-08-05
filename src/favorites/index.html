@@ -1,39 +1,36 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies | Favorites</title>
 
-  <title>Movies | Favorites</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/favorites.js"></script>
 
-  <link rel="stylesheet" href="/css/style.css" />
-  <script type="module" src="/js/favorites.js"></script>
+    <!-- google fonts Roboto & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-  <!-- google fonts Roboto & Playfair Display -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
-    rel="stylesheet" />
-</head>
+  <body>
+    <header class="divider" id="main-header"></header>
 
-<body>
-  <header class="divider" id="main-header"></header>
+    <h1 class="divider">Favorites</h1>
 
-  <h1 class="divider">Favorites</h1>
+    <main class="divider">
+      <section class="movie-lists">
+        <div class="movies-list" id="favorites">
+          <p class="loading">Loading Movies...</p>
+        </div>
+      </section>
+    </main>
 
-  <main class="divider">
-
-    <section class="movie-lists">
-
-      <div class="movies-list" id="favorites">
-        <p class="loading">Loading Movies...</p>
-      </div>
-    </section>
-  </main>
-
-  <footer id="main-footer"></footer>
-</body>
-
+    <footer id="main-footer"></footer>
+  </body>
 </html>

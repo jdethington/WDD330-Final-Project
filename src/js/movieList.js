@@ -12,8 +12,6 @@ const listSection = document.querySelector("#search-results"); // Which section 
 const movieList = new MovieList(searchQuery, dataSource, listSection);
 movieList.init();
 
-
-
 // =====================================================================
 // Need to move this into a shared mjs file
 // document.querySelector("#searchBtn").addEventListener("click", search);

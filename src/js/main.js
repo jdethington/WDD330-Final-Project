@@ -5,8 +5,8 @@ import {
   // setLocalStorage,
 } from "./utils.mjs";
 
-import MovieData from "./MovieData.mjs";
-import MovieList from "./MovieList.mjs";
+// import MovieData from "./MovieData.mjs";
+// import MovieList from "./MovieList.mjs";
 import Favorites from "./Favorites.mjs";
 
 loadHeaderFooter();
@@ -15,7 +15,7 @@ loadHeaderFooter();
 // Favorite Movies and Shows
 // Get favorites from local storage
 const favorites = getLocalStorage(STORAGE_KEY) || [];
-console.log(favorites);
+// console.log(favorites);
 // If there are no favorites, do not display the favorites section
 if (favorites.length > 0) {
   const favoriteMovies = new Favorites();
