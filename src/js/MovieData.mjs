@@ -14,41 +14,73 @@ const apiKEY = import.meta.env.VITE_API_KEY;
 // };
 // =============== Rapid API options =========================
 
-//  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
 import * as streamingAvailability from "streaming-availability";
+import {
+  buildFallbackMovieResults,
+  findFallbackMovieById,
+} from "./movieDataFallback.mjs";
 
-const API_KEY = apiKEY;
-const client = new streamingAvailability.Client(
-  new streamingAvailability.Configuration({
-    apiKey: API_KEY,
-  }),
-);
+let client = null;
 
-// const movieOfTheNightData = await client.showsApi.getShow({
-//   id: "tt0068646",
-// });
-// console.log(movieOfTheNightData);
-//  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
+function createClient() {
+  if (client) return client;
+
+  if (!apiKEY) {
+    return null;
+  }
+
+  try {
+    client = new streamingAvailability.Client(
+      new streamingAvailability.Configuration({
+        apiKey: apiKEY,
+      }),
+    );
+  } catch (error) {
+    console.warn("Movie API client failed to initialize:", error);
+    client = null;
+  }
+
+  return client;
+}
 
 export default class MovieData {
   constructor() {}
-  //  =============== FROM https://docs.movieofthenight.com/guide/quickstart =========================
 
   async searchShows(query) {
-    const data = await client.showsApi.searchShowsByTitle({
-      title: query,
-      country: "us",
-    });
-    console.log("Movie-Title",data);
-    return data;
+    const activeClient = createClient();
+
+    if (!activeClient) {
+      return buildFallbackMovieResults(undefined, query);
+    }
+
+    try {
+      const data = await activeClient.showsApi.searchShowsByTitle({
+        title: query,
+        country: "us",
+      });
+      return data;
+    } catch (error) {
+      console.warn("Movie search failed, using fallback data:", error);
+      return buildFallbackMovieResults(undefined, query);
+    }
   }
 
   async getMovieById(id) {
-    const movieOfTheNightData = await client.showsApi.getShow({
-      id: "tt0068646",
-    });
-    console.log(movieOfTheNightData);
-    return movieOfTheNightData;
+    const activeClient = createClient();
+
+    if (!activeClient) {
+      return findFallbackMovieById(undefined, id);
+    }
+
+    try {
+      const movieOfTheNightData = await activeClient.showsApi.getShow({
+        id,
+      });
+      return movieOfTheNightData;
+    } catch (error) {
+      console.warn("Movie lookup failed, using fallback data:", error);
+      return findFallbackMovieById(undefined, id);
+    }
   }
 
   // ********************************************************* Rapid API ************************************************************
