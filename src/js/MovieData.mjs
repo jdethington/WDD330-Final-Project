@@ -4,9 +4,15 @@ const apiBaseURL = (
 ).replace(/\/?$/, "/");
 
 function getApiKey() {
-  return (
-    import.meta.env.VITE_API_KEY || window.__MOVIE_API_KEY__ || "No API Found"
-  );
+  if (!window.__MOVIE_API_KEY__) {
+    window.__MOVIE_API_KEY__ =
+      import.meta.env.VITE_API_KEY ||
+      "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X";
+  }
+
+  const apiKey = window.__MOVIE_API_KEY__ || "";
+  console.log("Movie API key loaded:", apiKey ? "present" : "missing");
+  return apiKey;
 }
 
 function buildApiUrl(path) {
@@ -29,7 +35,7 @@ export default class MovieData {
 
   async searchShows(query) {
     const apiKEY = await getApiKey();
-    console.log("API KEY: ", apiKEY);
+    // console.log("API KEY: ", apiKEY);
     if (!apiKEY) {
       throw new Error("Movie API key is not configured.");
     }
