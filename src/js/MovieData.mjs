@@ -1,7 +1,19 @@
 // const baseURL = import.meta.env.VITE_SERVER_URL;
-const apiURL = import.meta.env.VITE_API_URL;
-const apiKEY = import.meta.env.VITE_API_KEY;
-// ===================================================== start
+const apiBaseURL = (
+  import.meta.env.VITE_API_URL || "https://api.movieofthenight.com/v4/"
+).replace(/\/?$/, "/");
+
+function getApiKey() {
+  return (
+    import.meta.env.VITE_API_KEY ||
+    window.__MOVIE_API_KEY__ ||
+    "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X"
+  );
+}
+
+function buildApiUrl(path) {
+  return new URL(path.replace(/^\/+/, ""), apiBaseURL).toString();
+}
 
 // =============== Rapid API options =========================
 // const options = {
@@ -18,7 +30,15 @@ export default class MovieData {
   constructor() {}
 
   async searchShows(query) {
-    const url = `${apiURL}shows/search/title?title=${encodeURIComponent(query || "")}&country=us`;
+    const apiKEY = await getApiKey();
+    console.log("API KEY: ", apiKEY);
+    if (!apiKEY) {
+      throw new Error("Movie API key is not configured.");
+    }
+
+    const url = buildApiUrl(
+      `shows/search/title?title=${encodeURIComponent(query || "")}&country=us`,
+    );
 
     const response = await fetch(url, {
       method: "GET",
@@ -36,8 +56,14 @@ export default class MovieData {
   }
 
   async getMovieById(id) {
+    const apiKEY = getApiKey();
+
+    if (!apiKEY) {
+      throw new Error("Movie API key is not configured.");
+    }
+
     const movieId = id || "110";
-    const url = `${apiURL}shows/${movieId}`;
+    const url = buildApiUrl(`shows/${movieId}`);
 
     const response = await fetch(url, {
       method: "GET",
@@ -84,7 +110,6 @@ export default class MovieData {
   //   return data;
   // }
 }
-
 
 // async function convertToJson(res) {
 //   const jsonResponse = await res.json();
