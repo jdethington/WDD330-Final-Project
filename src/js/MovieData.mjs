@@ -5,9 +5,7 @@ const apiBaseURL = (
 
 function getApiKey() {
   return (
-    import.meta.env.VITE_API_KEY ||
-    window.__MOVIE_API_KEY__ ||
-    "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X"
+    import.meta.env.VITE_API_KEY || window.__MOVIE_API_KEY__ || "No API Found"
   );
 }
 
