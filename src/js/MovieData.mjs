@@ -14,73 +14,44 @@ const apiKEY = import.meta.env.VITE_API_KEY;
 // };
 // =============== Rapid API options =========================
 
-import * as streamingAvailability from "streaming-availability";
-import {
-  buildFallbackMovieResults,
-  findFallbackMovieById,
-} from "./movieDataFallback.mjs";
-
-let client = null;
-
-function createClient() {
-  if (client) return client;
-
-  if (!apiKEY) {
-    return null;
-  }
-
-  try {
-    client = new streamingAvailability.Client(
-      new streamingAvailability.Configuration({
-        apiKey: apiKEY,
-      }),
-    );
-  } catch (error) {
-    console.warn("Movie API client failed to initialize:", error);
-    client = null;
-  }
-
-  return client;
-}
-
 export default class MovieData {
   constructor() {}
 
   async searchShows(query) {
-    const activeClient = createClient();
+    const url = `${apiURL}shows/search/title?title=${encodeURIComponent(query || "")}&country=us`;
 
-    if (!activeClient) {
-      return buildFallbackMovieResults(undefined, query);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "X-API-Key": apiKEY,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Movie search failed with status ${response.status}`);
     }
 
-    try {
-      const data = await activeClient.showsApi.searchShowsByTitle({
-        title: query,
-        country: "us",
-      });
-      return data;
-    } catch (error) {
-      console.warn("Movie search failed, using fallback data:", error);
-      return buildFallbackMovieResults(undefined, query);
-    }
+    return response.json();
   }
 
   async getMovieById(id) {
-    const activeClient = createClient();
+    const movieId = id || "110";
+    const url = `${apiURL}shows/${movieId}`;
 
-    if (!activeClient) {
-      return findFallbackMovieById(undefined, id);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "X-API-Key": apiKEY,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Movie lookup failed with status ${response.status}`);
     }
 
-    try {
-      const movieOfTheNightData = await activeClient.showsApi.getShow({
-        id,
-      });
-      return movieOfTheNightData;
-    } catch (error) {
-      console.warn("Movie lookup failed, using fallback data:", error);
-      return findFallbackMovieById(undefined, id);
-    }
+    return response.json();
   }
 
   // ********************************************************* Rapid API ************************************************************
@@ -113,6 +84,7 @@ export default class MovieData {
   //   return data;
   // }
 }
+
 
 // async function convertToJson(res) {
 //   const jsonResponse = await res.json();
