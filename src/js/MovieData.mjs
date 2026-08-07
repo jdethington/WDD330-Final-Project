@@ -3,14 +3,10 @@ const apiBaseURL = (
   import.meta.env.VITE_API_URL || "https://api.movieofthenight.com/v4/"
 ).replace(/\/?$/, "/");
 
-function getApiKey() {
-  if (!window.__MOVIE_API_KEY__) {
-    window.__MOVIE_API_KEY__ =
-      import.meta.env.VITE_API_KEY ||
-      "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X";
-  }
+const DEFAULT_API_KEY = "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X";
 
-  const apiKey = window.__MOVIE_API_KEY__ || "";
+function getApiKey() {
+  const apiKey = import.meta.env.VITE_API_KEY || DEFAULT_API_KEY;
   console.log("Movie API key loaded:", apiKey ? "present" : "missing");
   return apiKey;
 }
@@ -35,7 +31,6 @@ export default class MovieData {
 
   async searchShows(query) {
     const apiKEY = await getApiKey();
-    // console.log("API KEY: ", apiKEY);
     if (!apiKEY) {
       throw new Error("Movie API key is not configured.");
     }
