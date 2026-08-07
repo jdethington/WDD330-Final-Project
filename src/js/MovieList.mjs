@@ -12,10 +12,11 @@ export default class MovieList {
 
   async init() {
     // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
-    this.movies = await this.dataSource.searchShows(this.searchQuery);
+    this.movies = await this.dataSource.searchMovieByTitle(this.searchQuery);
+    // this.movies = await this.dataSource.searchShows(this.searchQuery);
     // the Movie details are needed before rendering the HTML
-    // console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    // console.log("MovieList.mjs", this.movies);
+    console.log("MovieList.mjs SearchQuery", this.searchQuery);
+    console.log("MovieList.mjs", this.movies);
     this.renderMovieList(this.movies);
 
     const title = this.searchQuery;

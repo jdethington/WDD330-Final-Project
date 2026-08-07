@@ -14,13 +14,13 @@ loadHeaderFooter();
 // =====================================================================
 // Favorite Movies and Shows
 // Get favorites from local storage
-const favorites = getLocalStorage(STORAGE_KEY) || [];
+// const favorites = getLocalStorage(STORAGE_KEY) || [];
 // console.log(favorites);
 // If there are no favorites, do not display the favorites section
-if (favorites.length > 0) {
-  const favoriteMovies = new Favorites();
-  favoriteMovies.init();
-}
+// if (favorites.length > 0) {
+const favoriteMovies = new Favorites();
+favoriteMovies.init();
+// }
 
 // =====================================================================
 // Need to move this into a shared mjs file

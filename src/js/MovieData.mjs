@@ -28,16 +28,62 @@ function buildApiUrl(path) {
 
 export default class MovieData {
   constructor() {}
+
+  async searchMovieByTitle(title) {
+    const url = `${apiBaseURL}shows/search/title?country=us&title=${title}&series_granularity=show&show_type=movie&output_language=en`;
+    const options = {
+      method: "GET",
+      headers: {
+        "X-API-Key": getApiKey(),
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`Movie lookup failed with status ${response.status}`);
+    }
+    const movie = response.json();
+    console.log("Response", movie);
+    return movie;
+  }
+
   // const data = await client.showsApi.searchShowsByTitle({  --movieofthenight.com--
-  async searchShows(query) {
-    const apiKEY = await getApiKey();
+  // async searchShows(query) {
+  //   const apiKEY = await getApiKey();
+  //   if (!apiKEY) {
+  //     throw new Error("Movie API key is not configured.");
+  //   }
+  //   // const url = `${apiBaseURL}shows/search/title?country=us&title=${query}&series_granularity=show&show_type=movie&output_language=en`;
+
+  //   // const url = buildApiUrl(
+  //   //   `shows/search/title?country=us&title=${encodeURIComponent(query || "")}series_granularity=show&show_type=movie&output_language=en&`,
+  //   // );
+
+  //   const response = await fetch(url, {
+  //     method: "GET",
+  //     headers: {
+  //       "X-API-Key": apiKEY,
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error(`Movie search failed with status ${response.status}`);
+  //   }
+
+  //   return response.json();
+  // }
+
+  // const data = await client.showsApi.getShow({  --movieofthenight.com--
+  async getMovieById(id) {
+    const apiKEY = getApiKey();
+
     if (!apiKEY) {
       throw new Error("Movie API key is not configured.");
     }
 
-    const url = buildApiUrl(
-      `shows/search/title?title=${encodeURIComponent(query || "")}&country=us`,
-    );
+    const movieId = id || "110";
+    const url = buildApiUrl(`shows/${movieId}`);
 
     const response = await fetch(url, {
       method: "GET",
@@ -48,21 +94,23 @@ export default class MovieData {
     });
 
     if (!response.ok) {
-      throw new Error(`Movie search failed with status ${response.status}`);
+      throw new Error(`Movie lookup failed with status ${response.status}`);
     }
 
     return response.json();
   }
 
-  async getMovieById(id) {
+  // const data = await client.showsApi.getTopShows({  --movieofthenight.com--
+  // showType: "movie",	service: "prime",	country: "us",
+  async getTopShowsByService(service) {
     const apiKEY = getApiKey();
 
     if (!apiKEY) {
       throw new Error("Movie API key is not configured.");
     }
 
-    const movieId = id || "110";
-    const url = buildApiUrl(`shows/${movieId}`);
+    const movieId = service || "prime";
+    const url = buildApiUrl(`service/${movieId}`);
 
     const response = await fetch(url, {
       method: "GET",

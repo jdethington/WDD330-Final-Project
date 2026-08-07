@@ -10,7 +10,8 @@ export default class Favorites {
   constructor() {
     this.movies = [];
     this.listSelection = document.querySelector("#favorites");
-    this.noFavorites = document.querySelector(".movie-lists");
+    this.noFavorites = document.querySelector("#favorites");
+    // this.noFavorites = document.querySelector(".movie-lists");
   }
 
   async init() {
@@ -20,7 +21,7 @@ export default class Favorites {
     // console.log("Favorites: ", this.movies);
 
     if (!this.movies) {
-      this.noFavorites.innerHTML = `<h2 class="no-favorites">Nothing yet.  Your favorite movies will show up here after you select them.</h2>`;
+      this.noFavorites.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
     }
     this.renderMovieList(this.movies);
   }
