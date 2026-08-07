@@ -150,6 +150,9 @@ input[type="text"] {
 .favorite-btn {
   padding: 6.5px 8px;
 }
+.no-favorites {
+  text-align: center;
+}
 
 .divider {
   border-bottom: 2px solid var(--primary);
@@ -225,7 +228,7 @@ main {
 
   width: 240px;
   /* height: 420px; */
-  height: 354px;
+  height: 360px;
 
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }

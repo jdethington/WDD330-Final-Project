@@ -10,6 +10,7 @@ export default class Favorites {
   constructor() {
     this.movies = [];
     this.listSelection = document.querySelector("#favorites");
+    this.noFavorites = document.querySelector(".movie-lists");
   }
 
   async init() {
@@ -17,10 +18,13 @@ export default class Favorites {
     this.movies = await getLocalStorage(STORAGE_KEY);
     // console.log("List Selection: ", this.listSelection);
     // console.log("Favorites: ", this.movies);
-    if (this.movies) {
-      this.renderMovieList(this.movies);
+
+    if (!this.movies) {
+      this.noFavorites.innerHTML = `<h2 class="no-favorites">Nothing yet.  Your favorite movies will show up here after you select them.</h2>`;
     }
+    this.renderMovieList(this.movies);
   }
+
   renderMovieList(movieList) {
     renderListWithTemplate(
       movieCardTemplate,
@@ -50,7 +54,7 @@ export default class Favorites {
   }
 }
 
-// =====================================================================
+// ============================ Favorites functions ====================
 
 // Returns true if movie is stored in local storage
 export function isFavorite(id) {

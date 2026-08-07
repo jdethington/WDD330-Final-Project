@@ -28,7 +28,7 @@ function buildApiUrl(path) {
 
 export default class MovieData {
   constructor() {}
-
+  // const data = await client.showsApi.searchShowsByTitle({  --movieofthenight.com--
   async searchShows(query) {
     const apiKEY = await getApiKey();
     if (!apiKEY) {

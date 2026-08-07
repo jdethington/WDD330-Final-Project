@@ -13,19 +13,5 @@ const movieList = new MovieList(searchQuery, dataSource, listSection);
 movieList.init();
 
 // =====================================================================
-// Need to move this into a shared mjs file
-// document.querySelector("#searchBtn").addEventListener("click", search);
 
-// async function search() {
-//   try {
-//     const searchTerm = document.querySelector("#searchInput").value.trim();
-
-//     if (!searchTerm) return;
-//     // Redirect to List page with search term
-//     window.location.href = `/movieList/index.html?id=${searchTerm}`;
-//   } catch (error) {
-//     // console.error(error);
-//     alert(error.message);
-//   }
-// }
 // =====================================================================
