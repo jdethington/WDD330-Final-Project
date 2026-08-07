@@ -51,16 +51,27 @@ export function renderListWithTemplate(
   if (clear) {
     container.innerHTML = "";
   }
+  if (!movies.shows) {
+    movies.forEach((movie) => {
+      const card = document.createElement("div");
 
-  movies.forEach((movie) => {
-    const card = document.createElement("div");
+      card.className = "movie-card";
+      card.dataset.id = movie.id;
 
-    card.className = "movie-card";
-    card.dataset.id = movie.id;
+      card.innerHTML = templateCard(movie);
+      container.appendChild(card);
+    });
+  } else {
+    movies.shows.forEach((movie) => {
+      const card = document.createElement("div");
 
-    card.innerHTML = templateCard(movie);
-    container.appendChild(card);
-  });
+      card.className = "movie-card";
+      card.dataset.id = movie.id;
+
+      card.innerHTML = templateCard(movie);
+      container.appendChild(card);
+    });
+  }
 }
 
 export async function loadTemplate(path) {
@@ -145,7 +156,8 @@ export function streamingServices(movie) {
               class="service-logo"
               src="${service.imageSet.lightThemeImage}"
               alt="${service.name}"
-              title="${service.name}">
+              title="${service.name}"
+              loading="lazy">
         </a>
     `,
     )

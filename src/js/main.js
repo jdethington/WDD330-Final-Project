@@ -1,12 +1,7 @@
-import {
-  loadHeaderFooter,
-  getLocalStorage,
-  STORAGE_KEY,
-  // setLocalStorage,
-} from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
 
-// import MovieData from "./MovieData.mjs";
-// import MovieList from "./MovieList.mjs";
+import MovieData from "./MovieData.mjs";
+import MovieList from "./MovieList.mjs";
 import Favorites from "./Favorites.mjs";
 
 loadHeaderFooter();
@@ -17,25 +12,19 @@ loadHeaderFooter();
 // const favorites = getLocalStorage(STORAGE_KEY) || [];
 // console.log(favorites);
 // If there are no favorites, do not display the favorites section
-// if (favorites.length > 0) {
 const favoriteMovies = new Favorites();
 favoriteMovies.init();
-// }
 
-// =====================================================================
-// Need to move this into a shared mjs file
-// document.querySelector("#searchBtn").addEventListener("click", search);
+const dataSource = new MovieData();
+const searchQuery = getParam("id") || null; // Search term passed in the URL query string. If no search term is provided, it will be null. This is used to determine which list of movies to display.
+// const listSection = "#search-results"; // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.
+const listSection = document.querySelector("#top-movies"); // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.
+const movieList = new MovieList(searchQuery, dataSource, listSection);
+movieList.getTopShows("prime", "movie");
+const seriesSection = document.querySelector("#new-movies"); // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.
+const seriesList = new MovieList(searchQuery, dataSource, seriesSection);
+seriesList.getTopShows("prime", "series");
 
-// async function search() {
-//   try {
-//     const searchTerm = document.querySelector("#searchInput").value.trim();
-
-//     if (!searchTerm) return;
-//     // Redirect to List page with search term
-//     window.location.href = `/movieList/index.html?id=${searchTerm}`;
-//   } catch (error) {
-//     // console.error(error);
-//     alert(error.message);
-//   }
-// }
-// =====================================================================
+// const newMoviesSection = document.querySelector("#new-movies"); // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.
+// const newMovieList = new MovieList(searchQuery, dataSource, newMoviesSection);
+// newMovieList.getNewestShows("prime", "series");

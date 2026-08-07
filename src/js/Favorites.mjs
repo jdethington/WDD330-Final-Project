@@ -20,10 +20,11 @@ export default class Favorites {
     // console.log("List Selection: ", this.listSelection);
     // console.log("Favorites: ", this.movies);
 
-    if (!this.movies) {
+    if (this.movies.length == 0) {
       this.noFavorites.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
+    } else {
+      this.renderMovieList(this.movies);
     }
-    this.renderMovieList(this.movies);
   }
 
   renderMovieList(movieList) {

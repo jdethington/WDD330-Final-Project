@@ -58,7 +58,7 @@ export default class MovieDetails {
 
 // Return a template for the movie to be displayed
 function movieDetailsTemplate(movie) {
-  console.log("Movie: ", movie);
+  // console.log("Movie: ", movie);
 
   const title = movie.title || "No Title Found";
   const cast = formatList(movie.cast) || "No Cast Available ";
