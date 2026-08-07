@@ -11,7 +11,7 @@
   --primary: #2563eb;
   --secondary: #1e293b;
   --accent: #f59e0b;
-  --background-light: #f8fafc;
+  --background-light: #f0f2f5;
   --background-dark: #122f4d;
   --text: #111827;
 
@@ -65,6 +65,10 @@ p {
   font-size: 30px;
   text-align: right;
   font-family: var(--font-headline);
+  transition: all 0.5s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .logo img {
@@ -98,6 +102,8 @@ input[type="text"] {
 /* utility classes */
 .highlight {
   color: var(--accent);
+  font-weight: bold;
+  background-color: var(--background-dark);
 }
 .light-text {
   color: var(--light-grey);
@@ -117,6 +123,9 @@ input[type="text"] {
   border: 2px solid transparent;
   cursor: pointer;
   /* margin: auto; */
+}
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .btn-search {
@@ -187,6 +196,7 @@ main {
   flex-wrap: nowrap;
   list-style-type: none;
   align-items: flex-start;
+  min-height: 370px;
   /* background-color: var(--background-dark); */
   background-color: var(--background-light);
   overflow-x: auto;

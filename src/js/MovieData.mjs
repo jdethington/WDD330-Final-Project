@@ -128,13 +128,13 @@ export default class MovieData {
     if (!response.ok) {
       throw new Error(`Movie search failed with status ${response.status}`);
     }
-    console.log("Response: ", response);
+    // console.log("Response: ", response);
     const movies = await convertToJson(response);
     // console.log("Newest Changes: ", movies.changes);
-    console.log("Newest Movies: ", movies);
-    console.log("Type of movies.shows:", typeof movies.shows);
-    console.log("Is movies.shows an array?", Array.isArray(movies.shows));
-    console.log("Value of movies.shows:", movies.shows);
+    // console.log("Newest Movies: ", movies);
+    // console.log("Type of movies.shows:", typeof movies.shows);
+    // console.log("Is movies.shows an array?", Array.isArray(movies.shows));
+    // console.log("Value of movies.shows:", movies.shows);
     return movies;
   }
 
