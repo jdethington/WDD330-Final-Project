@@ -154,10 +154,22 @@ input[type="text"] {
     text-decoration: none;
     color: var(--light-grey);
   }
+  img {
+    height: 27px;
+    width: auto;
+    &:hover {
+      transform: scale(1.25);
+    }
+  }
 }
 /* Button to add to favorite on movie cards */
 .favorite-btn {
   padding: 6.5px 8px;
+  width: 100%;
+  img {
+    height: 27px;
+    width: auto;
+  }
 }
 .no-favorites {
   text-align: center;
@@ -192,13 +204,14 @@ main {
   flex-wrap: nowrap;
   list-style-type: none;
   align-items: flex-start;
-  min-height: 370px;
-  /* background-color: var(--background-dark); */
-  background-color: var(--background-light);
+  min-height: 287px;
+  background-color: var(--secondary);
+  /* background-color: var(--background-light); */
   overflow-x: auto;
   overflow-y: hidden;
   gap: 1rem;
-  padding-bottom: 1rem;
+  /* padding-bottom: 1rem; */
+  padding: 1rem 1rem 0 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   /* scrollbar-width: thin; */
@@ -220,7 +233,7 @@ main {
 } */
 
 .movie-card {
-  flex: 0 0 240px;
+  flex: 0 0 128px;
   /* scroll-snap-align: start; */
   /* the flip card container */
   /* margin: 1rem; */
@@ -228,13 +241,13 @@ main {
   padding: 0;
   /* border: 1px solid var(--light-grey); */
   /* border-radius: 0.5rem; */
-  max-width: 240px;
+  max-width: 128px;
   /* background-color: var(--light-grey); */
   background-color: transparent;
 
-  width: 240px;
+  width: 128px;
   /* height: 420px; */
-  height: 360px;
+  height: 256px;
 
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
@@ -293,6 +306,11 @@ main {
   padding: 0.25rem;
   text-align: center;
   max-width: 240px;
+  font-size: var(--small-font);
+  /* font-size: var(--font-base); */
+}
+.title-front {
+  color: var(--light-grey);
 }
 
 /* End movie list card */
@@ -467,6 +485,23 @@ footer {
     margin-top: 0rem;
   }
   /* ----- header end ----- */
+
+  /* ----- Styles for movie lists ----- */
+  .movies-list {
+    min-height: 400px;
+  }
+  .movie-card {
+    flex: 0 0 240px;
+    max-width: 240px;
+    width: 240px;
+    height: 360px;
+  }
+  .movie-card h3,
+  .movie-card p {
+    /* max-width: 240px; */
+    font-size: var(--large-font);
+  }
+  /* ----- Styles for movie lists ----- */
 
   /* ----- Details page start ----- */
   .movie-hero {

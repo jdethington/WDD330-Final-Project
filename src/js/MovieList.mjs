@@ -57,7 +57,10 @@ export default class MovieList {
 
         button.addEventListener("click", (e) => {
           const isNowFavorite = toggleFavorite(movie);
-          button.textContent = isNowFavorite ? "☑️ Favorite" : "Add Favorite";
+          button.innerHTML = isNowFavorite
+            ? `<img src="/images/heart.svg">`
+            : `<img src="/images/heart-hollow.svg">`;
+          // button.textContent = isNowFavorite ? "☑️ Favorite" : "Add Favorite";
           e.stopPropagation();
         });
       });
@@ -67,11 +70,8 @@ export default class MovieList {
 // ======================================================================================
 // Template for each card
 export function movieCardTemplate(movie) {
-  // let movie = movieShow;
-  // if (movieShow.shows) {
-  //   movie = movie.shows;
-  // }
-  // console.log(movie);
+  const isMobile = window.matchMedia("(max-width: 600px)").matches;
+
   const poster =
     movie.imageSet.verticalPoster.w240 ||
     movie.imageSet.verticalPoster.w360 ||
@@ -80,9 +80,31 @@ export function movieCardTemplate(movie) {
   const rating = movie.rating ?? "N/A";
   const releaseYear = movie.releaseYear ?? "Unknown";
   const title = movie.title || "No Title Found";
-  const buttonText = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
+  // let buttonText = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
+  const buttonText = isFavorite(movie.id)
+    ? `<img src="/images/heart.svg">`
+    : `<img src="/images/heart-hollow.svg">`;
 
-  return `
+  if (isMobile) {
+    return `
+    <div class="card-inner">
+    <div class="card-front">
+    <img src="${poster}" alt="${title} poster" loading="lazy">
+    <p class="title-front">${title}</p>
+    </div>
+    <div class="card-back">
+    <p>${releaseYear}</p>
+    <p>${runtime} min</p>
+    <p>⭐${rating}/100</p>
+    <div class="btn btn-details"><a href="/moviePage/index.html?id=${movie.id}">Details</a></div>
+    <button class=" btn favorite-btn">
+    ${buttonText}
+    </button>
+    </div>
+    </div>
+    `;
+  } else {
+    return `
     <div class="card-inner">
       <div class="card-front">
         <img src="${poster}" alt="${title} poster" loading="lazy">
@@ -101,4 +123,5 @@ export function movieCardTemplate(movie) {
       </div>
     </div>
   `;
+  }
 }

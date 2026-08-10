@@ -49,9 +49,12 @@ export default class MovieDetails {
 
     button.addEventListener("click", () => {
       toggleFavorite(this.movie);
-      button.textContent = isFavorite(this.movie.id)
-        ? "☑️ Favorite"
-        : "Add Favorite";
+      button.innerHTML = isFavorite(this.movie.id)
+        ? `<img src="/images/heart.svg">`
+        : `<img src="/images/heart-hollow.svg">`;
+      // button.textContent = isFavorite(this.movie.id)
+      //   ? "☑️ Favorite"
+      //   : "Add Favorite";
     });
   }
 }
@@ -65,7 +68,10 @@ function movieDetailsTemplate(movie) {
   const genre = formatList(movie.genres) || "No Genres Found";
   const directors = formatList(movie.directors) || "No Directors Found";
   const streaming = streamingServices(movie) || [];
-  const favorite = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
+  // const favorite = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
+  const favorite = isFavorite(movie.id)
+    ? `<img src="/images/heart.svg">`
+    : `<img src="/images/heart-hollow.svg">`;
 
   const backdrop =
     movie.imageSet?.horizontalBackdrop?.w1080 ||
