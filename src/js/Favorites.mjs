@@ -1,10 +1,9 @@
 import {
-  renderListWithTemplate,
   getLocalStorage,
   setLocalStorage,
   STORAGE_KEY,
 } from "./utils.mjs";
-import { movieCardTemplate } from "./MovieList.mjs";
+import { renderMovieList } from "./MovieList.mjs";
 
 export default class Favorites {
   constructor() {
@@ -23,36 +22,8 @@ export default class Favorites {
     if (this.movies.length == 0) {
       this.noFavorites.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
     } else {
-      this.renderMovieList(this.movies);
+      renderMovieList(this.movies, this.listSelection);
     }
-  }
-
-  renderMovieList(movieList) {
-    renderListWithTemplate(
-      movieCardTemplate,
-      this.listSelection,
-      movieList,
-      "afterbegin",
-      true,
-    );
-
-    this.listSelection
-      .querySelectorAll(".favorite-btn")
-      .forEach((button, index) => {
-        const movie = movieList[index];
-        if (!movie) return;
-
-        button.addEventListener("click", () => {
-          const isNowFavorite = toggleFavorite(movie);
-          if (!isNowFavorite) {
-            const card = button.closest(".movie-card");
-            card?.remove();
-            return;
-          }
-
-          button.textContent = "☑️ Favorite";
-        });
-      });
   }
 }
 
