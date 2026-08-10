@@ -45,15 +45,13 @@ img {
   max-height: 100%;
 }
 
-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0.5rem;
-}
-
 p {
   padding: 0.75rem;
+}
+
+/* ********** Header Start ********** */
+header {
+  padding: 0.5rem;
 }
 
 .logo {
@@ -81,25 +79,23 @@ p {
   color: var(--font-body);
 }
 
-/* *************** Search field *************** */
-.search {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin-left: 1rem;
+/* ----- Search Field start ----- */
+form {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
-
 input[type="text"] {
-  /* margin-left: 1rem; */
   padding: 9.5px;
   border: 1px solid var(--secondary);
   border-radius: 8px;
   font-size: 1.25rem;
   color: var(--dark-grey);
 }
+/* ----- Search Field end ----- */
+/* ********** Header End ********** */
 
-/* utility classes */
+/* ********** utility classes start ********** */
 .highlight {
   color: var(--accent);
   font-weight: bold;
@@ -108,8 +104,12 @@ input[type="text"] {
 .light-text {
   color: var(--light-grey);
 }
+.divider {
+  border-bottom: 2px solid var(--primary);
+}
+/* ********** utility classes end ********** */
 
-/* button { */
+/* ********** button classes start ********** */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -162,18 +162,14 @@ input[type="text"] {
 .no-favorites {
   text-align: center;
 }
+/* ********** button classes end ********** */
 
-.divider {
-  border-bottom: 2px solid var(--primary);
-}
 /* =============================================== */
 main {
   overflow: visible;
   /* background-color: var(--background-dark); */
 }
 /* =============================================== */
-
-/* End utility classes */
 
 /* Loading  */
 .loading {
@@ -225,7 +221,7 @@ main {
 
 .movie-card {
   flex: 0 0 240px;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
   /* the flip card container */
   /* margin: 1rem; */
   /* padding: 0.25em; */
@@ -315,6 +311,7 @@ main {
   height: 280px;
   overflow: hidden;
   background: var(--secondary);
+  height: 220px;
 }
 
 .hero-background {
@@ -354,9 +351,9 @@ main {
 .movie-poster-wrap {
   flex-shrink: 0;
   width: 160px;
-  /* margin: -4rem auto 0;
+  /* margin: -4rem auto 0; */
   position: relative;
-  z-index: 2; */
+  /* z-index: 2; */
 }
 
 .movie-poster {
@@ -369,13 +366,13 @@ main {
 }
 
 .movie-info {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
+  /* flex: 1; */
+  /* min-width: 0; */
+  /* width: 100%; */
   background: var(--background-light);
   border-radius: 0.75rem;
   padding: 1.25rem 1rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); */
 }
 
 .movie-title {
@@ -446,17 +443,35 @@ footer {
   padding: 1em;
 }
 
-/* Movie details — tablet & up */
+/* ********** Movie details — tablet & up ********** */
 @media screen and (min-width: 600px) {
   body {
     max-width: 1080px;
     margin: auto;
   }
 
+  /* ----- header start ----- */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  form {
+    display: flex;
+    margin-top: 0rem;
+  }
+  /* ----- header end ----- */
+
+  /* ----- Details page start ----- */
   .movie-hero {
     height: 340px;
   }
-
   .movie-content {
     flex-direction: row;
     align-items: flex-start;
@@ -464,39 +479,28 @@ footer {
     margin-top: -6rem;
     padding: 0 1.5rem 2.5rem;
   }
-
   .movie-poster-wrap {
     width: 220px;
-    /* margin: -5rem 0 0; */
+    margin: -5rem 0 0;
   }
-
-  /* .movie-title {
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 1.5rem;
-  } */
-
-  /* .movie-overview {
-    padding-top: 1.5rem;
-  } */
   .movie-info {
     padding: 1.5rem;
     margin-top: 3rem;
   }
+  /* ----- Details page end ----- */
 }
 
 @media screen and (min-width: 900px) {
+  /* ----- Details page start ----- */
   .movie-hero {
     height: 400px;
   }
-
   .movie-content {
     margin-top: -7rem;
     gap: 2.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
   }
-
   .movie-poster-wrap {
     width: 240px;
     /* margin-top: -6rem; */
@@ -507,4 +511,5 @@ footer {
   .meta-row {
     grid-template-columns: 100px 1fr;
   }
+  /* ----- Details page end ----- */
 }
