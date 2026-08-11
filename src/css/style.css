@@ -191,6 +191,8 @@ input:focus {
 }
 .no-favorites {
   text-align: center;
+  color: var(--light-grey);
+  align-content: center;
 }
 /* ********** button classes end ********** */
 
@@ -221,7 +223,8 @@ main {
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  justify-content: space-around;
   min-height: 287px;
   background-color: var(--secondary);
   /* background-color: var(--background-light); */
@@ -231,7 +234,7 @@ main {
   /* padding-bottom: 1rem; */
   padding: 1rem 1rem 0 1rem;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   /* scrollbar-width: thin; */
   scrollbar-color: #f59f0baf transparent;
 }
@@ -252,7 +255,7 @@ main {
 
 .movie-card {
   flex: 0 0 128px;
-  /* scroll-snap-align: start; */
+  scroll-snap-align: center;
   /* ----- the flip card container ----- */
   /* margin: 1rem; */
   /* padding: 0.25em; */

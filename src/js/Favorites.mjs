@@ -82,18 +82,30 @@ export function updateFavoritesList(movie, isNowFavorite) {
     if (btn) {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
-        const stillFavorite = toggleFavorite(movie);
 
+        const stillFavorite = toggleFavorite(movie);
+        // Update the button on *this* card
         btn.innerHTML = stillFavorite
           ? `<img src="/images/heart.svg" alt="Movie in favorites">`
           : `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
 
         // Remove the badge and the card itself when unfavorited
         if (!stillFavorite) {
-          newCard.querySelector(".favorite-badge")?.remove();
+          // Remove this card from favorites list
           newCard.remove();
+          // Update every other card of the same movie on the page
+          document.querySelectorAll(`.movie-card[data-id="${movie.id}"]`).forEach((otherCard) => {
+            // remove the favorite badge
+            otherCard.querySelector(".favorite-badge")?.remove();
 
-          // Show empty message if list is now empty
+            // Change button back to hollow heart
+            const otherBtn = otherCard.querySelector(".favorite-btn");
+            if (otherBtn) {
+              otherBtn.innerHTML = `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
+            }
+          });
+
+          // Show empty message if Favorite list is now empty
           if (!favoritesContainer.querySelector(".movie-card")) {
             favoritesContainer.innerHTML = `
               <h2 class="no-favorites">
