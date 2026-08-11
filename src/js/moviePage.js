@@ -6,10 +6,9 @@ loadHeaderFooter();
 
 // =====================================================================
 const dataSource = new MovieData();
+
 const movieId = getParam("id");
 const movie = new MovieDetails(movieId, dataSource);
 movie.init();
-
-// =====================================================================
 
 // =====================================================================

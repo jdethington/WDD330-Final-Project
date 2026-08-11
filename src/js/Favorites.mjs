@@ -6,14 +6,11 @@ export default class Favorites {
     this.movies = [];
     this.listSelection = document.querySelector("#favorites");
     this.noFavorites = document.querySelector("#favorites");
-    // this.noFavorites = document.querySelector(".movie-lists");
   }
 
   async init() {
     // get movies from local storage
     this.movies = await getLocalStorage(STORAGE_KEY);
-    // console.log("List Selection: ", this.listSelection);
-    // console.log("Favorites: ", this.movies);
 
     if (this.movies.length == 0) {
       this.noFavorites.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
@@ -58,6 +55,7 @@ export function toggleFavorite(movie) {
   addFavorite(movie);
   return true;
 }
+
 // =====================================================================
 export function updateFavoritesList(movie, isNowFavorite) {
   const favoritesContainer = document.querySelector("#favorites");
@@ -118,8 +116,6 @@ export function updateFavoritesList(movie, isNowFavorite) {
 
     // Add the new card at the beginning of the favorites list
     favoritesContainer.prepend(newCard);
-    // newCard.classList.add("just-added");
-    // setTimeout(() => newCard.classList.remove("just-added"), 400);
     newCard.classList.add("slide-in");
     newCard.addEventListener(
       "animationend",

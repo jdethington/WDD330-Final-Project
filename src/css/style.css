@@ -1,10 +1,8 @@
 :root {
   --font-body: "Roboto", sans-serif;
   --font-headline: "Playfair Display", serif;
+
   /* colors */
-  /* --primary-color: #f0a868; */
-  /* --secondary-color: #525b0f; */
-  /* --tertiary-color: #8a470c; */
   --light-grey: #f0f0f0;
   --dark-grey: #303030;
 
@@ -19,6 +17,17 @@
   --font-base: 18px;
   --small-font: 0.8em;
   --large-font: 1.2em;
+
+  /* Card sizes */
+  --card-width-mobile: 128px;
+  --card-height-mobile: 256px;
+  --card-width-desktop: 240px;
+  --card-height-desktop: 360px;
+
+  /* Common radii & transitions */
+  --radius: 0.5rem;
+  --transition-fast: 0.25s ease;
+  --transition-medium: 0.5s ease;
 }
 
 * {
@@ -37,7 +46,6 @@ body {
 h1,
 h2 {
   padding: 1rem;
-  /* border-bottom: 2px solid var(--primary); */
 }
 
 img {
@@ -48,6 +56,19 @@ img {
 p {
   padding: 0.75rem;
 }
+/* ********** utility classes start ********** */
+.highlight {
+  color: var(--accent);
+  font-weight: bold;
+  background-color: var(--background-dark);
+}
+.divider {
+  border-bottom: 2px solid var(--primary);
+}
+.list-divider {
+  margin: 2rem -1rem 0;
+}
+/* ********** utility classes end ********** */
 
 /* ********** Header Start ********** */
 header {
@@ -89,43 +110,22 @@ form {
 input {
   padding: 9.5px;
   border: 2px solid var(--background-dark);
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-size: 1.25rem;
-  color: var(--dark-grey);
-  transition: all 0.5s ease;
-}
-/* keep hover subtle to avoid layout shifts */
-input:hover {
-  transform: scale(1.05);
+  /* color: var(--dark-grey); */
+  transition: all var(--transition-medium);
 }
 input:valid {
   border: 2px solid var(--primary);
 }
-input:focus {
+/* keep hover subtle to avoid layout shifts */
+input:focus,
+input:hover {
   transform: scale(1.05);
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
   outline: none;
 }
 /* ----- Search Field end ----- */
 /* ********** Header End ********** */
-
-/* ********** utility classes start ********** */
-.highlight {
-  color: var(--accent);
-  font-weight: bold;
-  background-color: var(--background-dark);
-}
-.light-text {
-  color: var(--light-grey);
-}
-.divider {
-  border-bottom: 2px solid var(--primary);
-}
-.list-divider {
-  margin: 2rem -1rem 0;
-}
-/* ********** utility classes end ********** */
 
 /* ********** button classes start ********** */
 .btn {
@@ -135,12 +135,12 @@ input:focus {
   padding: 12px 24px;
   font-size: 1.25rem;
   font-weight: 600;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius);
   border: 2px solid transparent;
   cursor: pointer;
-  /* margin: auto; */
+  transition: transform
+    var(--transition-fast, background-color var(--transition-fast));
+  text-decoration: none;
 }
 .btn:hover {
   transform: scale(1.1);
@@ -162,22 +162,16 @@ input:focus {
     color: var(--secondary);
   }
 }
+/* button in header */
 .btn-favorites {
   display: flex;
   background-color: var(--primary);
   color: var(--light-grey);
   margin: auto;
   padding: 8px 12px;
-  a {
-    text-decoration: none;
-    color: var(--light-grey);
-  }
   img {
     height: 27px;
     width: auto;
-    &:hover {
-      transform: scale(1.25);
-    }
   }
 }
 /* Button to add to favorite on movie cards */
@@ -199,7 +193,6 @@ input:focus {
 /* =============================================== */
 main {
   overflow: visible;
-  /* background-color: var(--background-dark); */
 }
 /* =============================================== */
 
@@ -207,35 +200,26 @@ main {
 .loading {
   text-align: center;
   font-size: var(--large-font);
-}
-
-.movies {
-  margin-top: 2rem;
-  padding: 1rem;
+  color: var(--light-grey);
 }
 
 /* Styles for movie lists */
 .movie-lists {
   padding: 1rem;
-  /* background-color: var(--background-dark); */
 }
 .movies-list {
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
-  /* align-items: flex-start; */
   justify-content: space-around;
   min-height: 287px;
   background-color: var(--secondary);
-  /* background-color: var(--background-light); */
   overflow-x: auto;
   overflow-y: hidden;
   gap: 1rem;
-  /* padding-bottom: 1rem; */
   padding: 1rem 1rem 0 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
-  /* scrollbar-width: thin; */
   scrollbar-color: #f59f0baf transparent;
 }
 
@@ -248,27 +232,16 @@ main {
   border-radius: 999px;
 }
 
-/* .movies-list {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-} */
-
 .movie-card {
-  flex: 0 0 128px;
+  flex: 0 0 var(--card-width-mobile);
   scroll-snap-align: center;
   /* ----- the flip card container ----- */
-  /* margin: 1rem; */
-  /* padding: 0.25em; */
   padding: 0;
-  /* border: 1px solid var(--light-grey); */
-  /* border-radius: 0.5rem; */
-  max-width: 128px;
-  /* background-color: var(--light-grey); */
+  max-width: var(--card-width-mobile);
   background-color: transparent;
 
-  width: 128px;
-  /* height: 420px; */
-  height: 256px;
+  width: var(--card-width-mobile);
+  height: var(--card-height-mobile);
 
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
@@ -293,7 +266,7 @@ main {
   width: 100%;
   height: 100%;
 
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
 
   overflow: hidden;
 
@@ -304,8 +277,8 @@ main {
   /* Style the front side (fallback if image is missing) */
   background: var(--secondary);
   img {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
   }
 }
 .favorite-badge {
@@ -356,18 +329,16 @@ main {
 
 .movie-card h3,
 .movie-card p {
-  /* margin: 0.5em 0; */
   padding: 0.25rem;
   text-align: center;
   max-width: 240px;
   font-size: var(--small-font);
-  /* font-size: var(--font-base); */
 }
 .title-front {
   color: var(--light-grey);
 }
 
-.movie-card.just-added {
+.movie-card {
   animation: slideIn 0.35s ease;
 }
 
@@ -434,7 +405,7 @@ main {
   background: linear-gradient(
     to top,
     rgba(18, 47, 77, 0.95) 0%,
-    /* rgba(18, 47, 77, 0.4) 50%, */ rgba(18, 47, 77, 0.45) 45%,
+    rgba(18, 47, 77, 0.45) 45%,
     rgba(18, 47, 77, 0.15) 100%
   );
   pointer-events: none;
@@ -456,28 +427,23 @@ main {
 .movie-poster-wrap {
   flex-shrink: 0;
   width: 160px;
-  /* margin: -4rem auto 0; */
   position: relative;
-  /* z-index: 2; */
 }
 
 .movie-poster {
   width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   display: block;
   background: var(--secondary);
 }
 
 .movie-info {
-  /* flex: 1; */
-  /* min-width: 0; */
-  /* width: 100%; */
   background: var(--background-light);
   border-radius: 0.75rem;
   padding: 1.25rem 1rem;
-  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 1);
 }
 
 .movie-title {
@@ -578,14 +544,13 @@ footer {
     min-height: 400px;
   }
   .movie-card {
-    flex: 0 0 240px;
-    max-width: 240px;
-    width: 240px;
-    height: 360px;
+    flex: 0 0 var(--card-width-desktop);
+    max-width: var(--card-width-desktop);
+    width: var(--card-width-desktop);
+    height: var(--card-height-desktop);
   }
   .movie-card h3,
   .movie-card p {
-    /* max-width: 240px; */
     font-size: var(--large-font);
   }
 
@@ -597,8 +562,8 @@ footer {
       margin-right: 0;
     }
     100% {
-      width: 240px; /* desktop card width */
-      min-width: 240px;
+      width: var(--card-width-desktop); /* desktop card width */
+      min-width: var(--card-width-desktop);
       opacity: 1;
     }
   }

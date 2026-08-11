@@ -17,7 +17,6 @@ export default class MovieDetails {
     if (isFavorite(this.movieId)) {
       const favorites = await getLocalStorage(STORAGE_KEY);
       const movieLS = favorites.find((movie) => movie.id == this.movieId);
-      // console.log(movieLS);
       this.movie = movieLS || {};
     } else {
       // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
@@ -30,7 +29,6 @@ export default class MovieDetails {
       const h1 = document.querySelector("h1");
       h1.innerText = title;
     }
-    // console.log(this.movie);
     this.renderMovieDetails();
   }
 
@@ -73,10 +71,9 @@ export default class MovieDetails {
   }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Return a template for the movie to be displayed
 function movieDetailsTemplate(movie) {
-  // console.log("Movie: ", movie);
-
   const title = movie.title || "No Title Found";
   const cast = formatList(movie.cast) || "No Cast Available ";
   const genre = formatList(movie.genres) || "No Genres Found";

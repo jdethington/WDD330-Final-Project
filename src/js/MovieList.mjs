@@ -17,11 +17,7 @@ export default class MovieList {
   async init() {
     // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
     this.movies = await this.dataSource.searchShows(this.searchQuery);
-    // this.movies = await this.dataSource.getTopShows();
-    // this.movies = await this.dataSource.searchShows(this.searchQuery);
-    // the Movie details are needed before rendering the HTML
-    // console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    // console.log("MovieList.mjs", this.movies);
+
     renderMovieList(this.movies, this.listSection);
 
     const title = this.searchQuery;
@@ -30,17 +26,15 @@ export default class MovieList {
       document.title = `Movies | ${toTitleCase(title)}`;
     }
   }
+
   async getTopShows(series, type) {
     this.movies = await this.dataSource.getTopShows(series, type);
-    // console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    // console.log("MovieList.mjs", this.movies);
 
     renderMovieList(this.movies, this.listSection);
   }
+
   async getNewestShows(series, type) {
     this.movies = await this.dataSource.getNewestShows(series, type);
-    // console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    // console.log("MovieList.mjs", this.movies);
 
     renderMovieList(this.movies, this.listSection);
   }

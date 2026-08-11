@@ -8,7 +8,7 @@ const DEFAULT_API_KEY = "motn-key-v4-Qwv0rNZBLxxT3Z87bi1DonkHJ4qX5I8X";
 
 function getApiKey() {
   const apiKey = import.meta.env.VITE_API_KEY || DEFAULT_API_KEY;
-  console.log("Movie API key loaded:", apiKey ? "present" : "missing");
+  // console.log("Movie API key loaded:", apiKey ? "present" : "missing");
   return apiKey;
 }
 
@@ -16,31 +16,16 @@ function buildApiUrl(path) {
   return new URL(path.replace(/^\/+/, ""), apiBaseURL).toString();
 }
 
-// =============== Rapid API options =========================
-// const options = {
-//   method: "GET",
-//   headers: {
-//     "x-rapidapi-key": apiKEY,
-//     "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
-//     "Content-Type": "application/json",
-//   },
-// };
-// =============== Rapid API options =========================
-
 export default class MovieData {
   constructor() {}
 
-  // const data = await client.showsApi.searchShowsByTitle({  --movieofthenight.com--
+  // --------------------------------
   async searchShows(query) {
     const apiKEY = await getApiKey();
     if (!apiKEY) {
       throw new Error("Movie API key is not configured.");
     }
     const url = `${apiBaseURL}shows/search/title?country=us&title=${query}&series_granularity=show&show_type=movie&output_language=en`;
-
-    // const url = buildApiUrl(
-    //   `shows/search/title?country=us&title=${encodeURIComponent(query || "")}series_granularity=show&show_type=movie&output_language=en&`,
-    // );
 
     const response = await fetch(url, {
       method: "GET",
@@ -56,8 +41,7 @@ export default class MovieData {
 
     return response.json();
   }
-
-  // const data = await client.showsApi.getShow({  --movieofthenight.com--
+  // --------------------------------
   async getMovieById(id) {
     const apiKEY = getApiKey();
 
@@ -83,7 +67,7 @@ export default class MovieData {
     return response.json();
   }
 
-  // ********************************************************************************************************
+  // --------------------------------
   async getTopShows(service, showType) {
     const url = new URL(`${apiBaseURL}shows/top`);
     url.searchParams.set("country", "us");
@@ -101,74 +85,45 @@ export default class MovieData {
     if (!response.ok) {
       throw new Error(`Movie search failed with status ${response.status}`);
     }
-    // console.log("Response: ", response);
     const movies = await convertToJson(response);
-    console.log("Top Movies: ", movies);
     return movies;
   }
 
-  async getNewestShows(service, showType) {
-    // const url = new URL(`${apiBaseURL}changes`);
-    const url = new URL(`${apiBaseURL}shows/top`);
+  // -------------------------------- For Future Use ----------
+  // async getNewestShows(service, showType) {
+  //   // const url = new URL(`${apiBaseURL}changes`);
+  //   const url = new URL(`${apiBaseURL}shows/top`);
 
-    url.searchParams.set("country", "us");
-    // url.searchParams.set("catalogs", service);
-    // url.searchParams.set("service", service);
-    // url.searchParams.set("change_type", "new");
-    // url.searchParams.set("item_type", "show");
-    url.searchParams.set("show_type", showType);
-    const options = {
-      method: "GET",
-      headers: {
-        "X-API-Key": DEFAULT_API_KEY,
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Movie search failed with status ${response.status}`);
-    }
-    // console.log("Response: ", response);
-    const movies = await convertToJson(response);
-    // console.log("Newest Changes: ", movies.changes);
-    // console.log("Newest Movies: ", movies);
-    // console.log("Type of movies.shows:", typeof movies.shows);
-    // console.log("Is movies.shows an array?", Array.isArray(movies.shows));
-    // console.log("Value of movies.shows:", movies.shows);
-    return movies;
-  }
-
-  // ********************************************************* Rapid API ************************************************************
-  // async searchShows(query) {
-  //   const url = `${apiURL}/shows/search/title?title=${query}&country=us&show_type=movie&output_language=en`;
-
+  //   url.searchParams.set("country", "us");
+  //   // url.searchParams.set("catalogs", service);
+  //   // url.searchParams.set("service", service);
+  //   // url.searchParams.set("change_type", "new");
+  //   // url.searchParams.set("item_type", "show");
+  //   url.searchParams.set("show_type", showType);
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "X-API-Key": DEFAULT_API_KEY,
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
   //   const response = await fetch(url, options);
-
   //   if (!response.ok) {
-  //     throw new Error("Search failed.");
+  //     throw new Error(`Movie search failed with status ${response.status}`);
   //   }
-  //   const data = await convertToJson(response);
-
-  //   return data;
-  // }
-
-  // async getMovieById(id) {
-  //   const newId = id || "110";
-  //   const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
-
-  //   const response = await fetch(url, options);
-  //   console.log("Response: ", response);
-
-  //   if (!response.ok) {
-  //     throw new Error("Unable to load movie.");
-  //   }
-  //   const data = await convertToJson(response);
-  //   console.log("Response json: ", data);
-
-  //   return data;
+  //   // console.log("Response: ", response);
+  //   const movies = await convertToJson(response);
+  //   // console.log("Newest Changes: ", movies.changes);
+  //   // console.log("Newest Movies: ", movies);
+  //   // console.log("Type of movies.shows:", typeof movies.shows);
+  //   // console.log("Is movies.shows an array?", Array.isArray(movies.shows));
+  //   // console.log("Value of movies.shows:", movies.shows);
+  //   return movies;
   // }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// --------------------------------
 async function convertToJson(res) {
   const jsonResponse = await res.json();
   if (res.ok) {
@@ -177,64 +132,3 @@ async function convertToJson(res) {
     throw { name: "servicesError", message: jsonResponse };
   }
 }
-
-// =====================================================
-// get information on 1 movie
-// export async function getMovie(id) {
-//   const newId = id || "110";
-//   const url = `${apiURL}/shows/${newId}?output_language=en`;
-
-//   const response = await fetch(url, options);
-//   // console.log(response);
-
-//   if (!response.ok) {
-//     throw new Error("Movie not found");
-//   }
-
-//   return await response.json();
-// }
-// =====================================================
-// get information on movie search title
-// export async function getMovies(search) {
-
-//   const url = `${apiURL}/shows/search/title?country=us&title=${search}&series_granularity=show&show_type=movie&output_language=en`;
-
-//   const response = await fetch(url, options);
-//   // console.log(response);
-
-//   if (!response.ok) {
-//     throw new Error("Movie not found");
-//   }
-
-//   return await response.json();
-// }
-
-// function joinSearchTerms(search) {
-
-// }
-// =====================================================
-
-// export async function searchShows(query) {
-//   const url = `${apiURL}/shows/search/title?title=${encodeURIComponent(query)}&country=us&show_type=movie&output_language=en`;
-
-//   const response = await fetch(url, options);
-
-//   if (!response.ok) {
-//     throw new Error("Search failed.");
-//   }
-
-//   return await response.json();
-// }
-
-// export async function getShow(id) {
-//   const newId = id || "110";
-//   const url = `${apiURL}/shows/${newId}?output_language=en&country=us`;
-
-//   const response = await fetch(url, options);
-
-//   if (!response.ok) {
-//     throw new Error("Unable to load movie.");
-//   }
-
-//   return await response.json();
-// }

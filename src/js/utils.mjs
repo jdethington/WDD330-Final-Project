@@ -1,10 +1,3 @@
-// wrapper for querySelector...returns matching element
-export function qs(selector, parent = document) {
-  return parent.querySelector(selector);
-}
-// or a more concise version if you are into that sort of thing:
-// export const qs = (selector, parent = document) => parent.querySelector(selector);
-
 // const STORAGE_KEY = "Movie-favorites";
 export const STORAGE_KEY = "FM-favorites";
 
@@ -16,14 +9,7 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
-// set a listener for both touchend and click
-export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
-    event.preventDefault();
-    callback();
-  });
-  qs(selector).addEventListener("click", callback);
-}
+
 // Return parameter from URL
 export function getParam(param) {
   const queryString = window.location.search;
@@ -92,34 +78,6 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-// Create alert message to display at top of
-export function alertMessage(message, scroll = true, duration = 3000) {
-  // 1. Create alert element
-  const alert = document.createElement("div");
-  alert.classList.add("alert");
-  alert.classList.add("form-alert");
-  // 2. Set content (Proper </p> tag & 'X' inside <span>)
-  alert.innerHTML = `<p class="alert form-alert">${message}</p><span class="delete-button" aria-label="Close">X</span>`;
-  // 3. Add close button listener
-  // ====================== USE setClick function from earlier =================================================
-  alert.addEventListener("click", function (e) {
-    if (e.target.tagName === "SPAN" || e.target.innerText === "X") {
-      main.removeChild(this);
-    }
-  });
-  // 4. Select <main> and insert alert at the top
-  const main = document.querySelector("main");
-  main.prepend(alert);
-  // 5. Scroll to top if requested
-  if (scroll) {
-    window.scrollTo(0, 0);
-  }
-  // alert removed after duration
-  setTimeout(() => {
-    main.removeChild(alert);
-  }, duration);
-}
-
 // Function to display a list items (cast, genres, directors...)
 export function formatList(items) {
   const formatted = items
@@ -132,7 +90,7 @@ export function formatList(items) {
 
   return formatted || "Unavailable";
 }
-//
+// Crates a list of services that are streaming the movie 
 export function streamingServices(movie) {
   // console.log("PreMap", movie.streamingOptions.us);
   if (!movie.streamingOptions.us) {
@@ -165,7 +123,7 @@ export function streamingServices(movie) {
 
   return serviceHTML;
 }
-
+// Sets the Movie Title to title case 
 export function toTitleCase(str) {
   if (!str) return "";
   const small = new Set([
