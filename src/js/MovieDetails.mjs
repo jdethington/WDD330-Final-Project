@@ -86,8 +86,8 @@ function movieDetailsTemplate(movie) {
   const isFav = isFavorite(movie.id);
 
   const favorite = isFav
-    ? `<img src="/images/heart.svg">`
-    : `<img src="/images/heart-hollow.svg">`;
+    ? `<img src="/images/heart.svg" alt="Filled heart">`
+    : `<img src="/images/heart-hollow.svg" alt="Hollow heart">`;
 
   const favoriteBadge = isFav
     ? ` <div class="favorite-badge">
@@ -143,7 +143,7 @@ function movieDetailsTemplate(movie) {
             <dd class="meta-streaming">${streaming}</dd>
             </div>
           </dl>
-          <button class="btn btn-favorites isFavorite">
+          <button class="btn btn-favorites isFavorite" aria-label="Favorite heart">
             ${favorite}
           </button>
         </div>

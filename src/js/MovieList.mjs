@@ -105,8 +105,8 @@ export function movieCardTemplate(movie) {
   const isFav = isFavorite(movie.id);
 
   const buttonText = isFav
-    ? `<img src="/images/heart.svg">`
-    : `<img src="/images/heart-hollow.svg">`;
+    ? `<img src="/images/heart.svg" alt="Filled Heart">`
+    : `<img src="/images/heart-hollow.svg" alt="Hollow heart">`;
 
   const favoriteBadge = isFav
     ? ` <div class="favorite-badge">
@@ -127,7 +127,7 @@ export function movieCardTemplate(movie) {
       <p>${runtime} min</p>
       <p>⭐${rating}/100</p>
       <div class="btn btn-details"><a href="/moviePage/index.html?id=${movie.id}">Details</a></div>
-        <button class=" btn favorite-btn">
+        <button class=" btn favorite-btn" aria-label="Favorite heart">
           ${buttonText}
         </button>
       </div>
@@ -148,7 +148,7 @@ export function movieCardTemplate(movie) {
         <div class="btn btn-details"><a href="/moviePage/index.html?id=${movie.id}">
           More Details</a>
         </div>
-        <button class=" btn favorite-btn">
+        <button class=" btn favorite-btn" aria-label="Favorite heart">
           ${buttonText}
         </button>
       </div>

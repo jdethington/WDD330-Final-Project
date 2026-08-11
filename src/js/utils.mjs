@@ -99,7 +99,7 @@ export function alertMessage(message, scroll = true, duration = 3000) {
   alert.classList.add("alert");
   alert.classList.add("form-alert");
   // 2. Set content (Proper </p> tag & 'X' inside <span>)
-  alert.innerHTML = `<p class="alert form-alert">${message}</p><span class="delete-button">X</span>`;
+  alert.innerHTML = `<p class="alert form-alert">${message}</p><span class="delete-button" aria-label="Close">X</span>`;
   // 3. Add close button listener
   // ====================== USE setClick function from earlier =================================================
   alert.addEventListener("click", function (e) {
