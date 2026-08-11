@@ -1,5 +1,9 @@
 // ********************************************************
-import { isFavorite, toggleFavorite } from "./Favorites.mjs";
+import {
+  isFavorite,
+  toggleFavorite,
+  updateFavoritesList,
+} from "./Favorites.mjs";
 import { renderListWithTemplate, toTitleCase } from "./utils.mjs";
 
 export default class MovieList {
@@ -79,6 +83,8 @@ export function renderMovieList(movieList, listSection) {
       } else {
         card.querySelector(".favorite-badge")?.remove();
       }
+      // ===== Live update the Favorites list on the home page =====
+      updateFavoritesList(movie, isNowFavorite);
     });
   });
 }

@@ -1,9 +1,5 @@
-import {
-  getLocalStorage,
-  setLocalStorage,
-  STORAGE_KEY,
-} from "./utils.mjs";
-import { renderMovieList } from "./MovieList.mjs";
+import { getLocalStorage, setLocalStorage, STORAGE_KEY } from "./utils.mjs";
+import { movieCardTemplate, renderMovieList } from "./MovieList.mjs";
 
 export default class Favorites {
   constructor() {
@@ -61,6 +57,78 @@ export function toggleFavorite(movie) {
 
   addFavorite(movie);
   return true;
+}
+// =====================================================================
+export function updateFavoritesList(movie, isNowFavorite) {
+  const favoritesContainer = document.querySelector("#favorites");
+  if (!favoritesContainer) return; // only runs on the home page
+
+  if (isNowFavorite) {
+    // Remove the "no favorites" message if it exists
+    const emptyMsg = favoritesContainer.querySelector(".no-favorites");
+    if (emptyMsg) emptyMsg.remove();
+
+    // Don't add a duplicate
+    if (favoritesContainer.querySelector(`[data-id="${movie.id}"]`)) return;
+
+    // Create the card using the same template
+    const newCard = document.createElement("div");
+    newCard.className = "movie-card";
+    newCard.dataset.id = movie.id;
+    newCard.innerHTML = movieCardTemplate(movie);
+
+    // Attach the same favorite button listener to the new card
+    const btn = newCard.querySelector(".favorite-btn");
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const stillFavorite = toggleFavorite(movie);
+
+        btn.innerHTML = stillFavorite
+          ? `<img src="/images/heart.svg" alt="Movie in favorites">`
+          : `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
+
+        // Remove the badge and the card itself when unfavorited
+        if (!stillFavorite) {
+          newCard.querySelector(".favorite-badge")?.remove();
+          newCard.remove();
+
+          // Show empty message if list is now empty
+          if (!favoritesContainer.querySelector(".movie-card")) {
+            favoritesContainer.innerHTML = `
+              <h2 class="no-favorites">
+                Your favorite movies will show up here after you select them.
+              </h2>`;
+          }
+        }
+      });
+    }
+
+    // Add the new card at the beginning of the favorites list
+    favoritesContainer.prepend(newCard);
+    // newCard.classList.add("just-added");
+    // setTimeout(() => newCard.classList.remove("just-added"), 400);
+    newCard.classList.add("slide-in");
+    newCard.addEventListener(
+      "animationend",
+      () => newCard.classList.remove("slide-in"),
+      { once: true },
+    );
+  } else {
+    // User unfavorited → remove the card from the favorites list
+    const cardToRemove = favoritesContainer.querySelector(
+      `[data-id="${movie.id}"]`,
+    );
+    if (cardToRemove) cardToRemove.remove();
+
+    // Show empty message if nothing left
+    if (!favoritesContainer.querySelector(".movie-card")) {
+      favoritesContainer.innerHTML = `
+        <h2 class="no-favorites">
+          Your favorite movies will show up here after you select them.
+        </h2>`;
+    }
+  }
 }
 
 // =====================================================================

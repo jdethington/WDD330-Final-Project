@@ -103,6 +103,9 @@ input:valid {
 }
 input:focus {
   transform: scale(1.05);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  outline: none;
 }
 /* ----- Search Field end ----- */
 /* ********** Header End ********** */
@@ -361,6 +364,39 @@ main {
   color: var(--light-grey);
 }
 
+.movie-card.just-added {
+  animation: slideIn 0.35s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===== Slide-in for newly favorited cards ===== */
+.movie-card.slide-in {
+  animation: slideInFromLeft 1s ease-out forwards;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+@keyframes slideInFromLeft {
+  0% {
+    width: 1px;
+    min-width: 1px;
+    opacity: 0.35;
+    margin-right: 0;
+  }
+  100% {
+    width: 128px; /* mobile card width */
+    min-width: 128px;
+    opacity: 1;
+  }
+}
 /* End movie list card */
 
 /* ========== Movie Details Page ========== */
@@ -548,6 +584,20 @@ footer {
   .movie-card p {
     /* max-width: 240px; */
     font-size: var(--large-font);
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      width: 1px;
+      min-width: 1px;
+      opacity: 0.35;
+      margin-right: 0;
+    }
+    100% {
+      width: 240px; /* desktop card width */
+      min-width: 240px;
+      opacity: 1;
+    }
   }
   /* ----- Styles for movie lists ----- */
 
