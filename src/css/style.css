@@ -85,12 +85,24 @@ form {
   gap: 0.5rem;
   margin-top: 1rem;
 }
-input[type="text"] {
+/* input[type="text"] { */
+input {
   padding: 9.5px;
-  border: 1px solid var(--secondary);
+  border: 2px solid var(--background-dark);
   border-radius: 8px;
   font-size: 1.25rem;
   color: var(--dark-grey);
+  transition: all 0.5s ease;
+}
+/* keep hover subtle to avoid layout shifts */
+input:hover {
+  transform: scale(1.05);
+}
+input:valid {
+  border: 2px solid var(--primary);
+}
+input:focus {
+  transform: scale(1.05);
 }
 /* ----- Search Field end ----- */
 /* ********** Header End ********** */
