@@ -107,6 +107,9 @@ input[type="text"] {
 .divider {
   border-bottom: 2px solid var(--primary);
 }
+.list-divider {
+  margin: 2rem -1rem 0;
+}
 /* ********** utility classes end ********** */
 
 /* ********** button classes start ********** */
@@ -290,7 +293,7 @@ main {
 .favorite-badge {
   position: absolute;
   top: 6px;
-  right: 6px;
+  left: 6px;
   z-index: 5;
   width: 28px;
   height: 28px;
@@ -301,23 +304,21 @@ main {
   justify-content: center;
   pointer-events: none; /* so it doesn't interfere with the flip */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: scale(0.6);
+  animation: badgePop 0.25s ease forwards;
 }
 .favorite-badge img {
   width: 16px;
   height: 16px;
-}
-/* Optional nicer animation */
-/* .favorite-badge {
-  opacity: 0;
-  transform: scale(0.6);
-  animation: badgePop 0.25s ease forwards;
 }
 @keyframes badgePop {
   to {
     opacity: 1;
     transform: scale(1);
   }
-} */
+}
 
 .card-back {
   /* Style the back side */

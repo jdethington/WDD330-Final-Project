@@ -36,12 +36,13 @@ export default class MovieList {
   async getNewestShows(series, type) {
     this.movies = await this.dataSource.getNewestShows(series, type);
     // console.log("MovieList.mjs SearchQuery", this.searchQuery);
-    console.log("MovieList.mjs", this.movies);
+    // console.log("MovieList.mjs", this.movies);
 
     renderMovieList(this.movies, this.listSection);
   }
 }
 
+// ======================================================================================
 export function renderMovieList(movieList, listSection) {
   renderListWithTemplate(
     movieCardTemplate,
@@ -82,7 +83,6 @@ export function renderMovieList(movieList, listSection) {
   });
 }
 
-// ======================================================================================
 // Template for each card
 export function movieCardTemplate(movie) {
   const isMobile = window.matchMedia("(max-width: 600px)").matches;

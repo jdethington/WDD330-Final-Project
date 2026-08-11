@@ -22,19 +22,19 @@ export default class MovieDetails {
     } else {
       // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
       this.movie = await this.dataSource.getMovieById(this.movieId);
+
+      // Set the title for the browser tab ===========================================
+      const title = this.movie?.title || "Movie";
+      document.title = `Movies | ${title}`;
+      // Set the Page title ===========================================
+      const h1 = document.querySelector("h1");
+      h1.innerText = title;
     }
     // console.log(this.movie);
     this.renderMovieDetails();
-
-    // Set the title for the browser tab ===========================================
-    const title = this.movie?.title || "Movie";
-    document.title = `Movies | ${title}`;
-    const h1 = document.querySelector("h1");
-    h1.innerText = title;
   }
 
   renderMovieDetails() {
-    // const mainElement = document.querySelector("main");
     const mainElement = document.querySelector("#show");
     mainElement.innerHTML = "";
     if (mainElement) {
@@ -47,14 +47,28 @@ export default class MovieDetails {
     const button = document.querySelector(".isFavorite");
     if (!button) return;
 
-    button.addEventListener("click", () => {
-      toggleFavorite(this.movie);
-      button.innerHTML = isFavorite(this.movie.id)
-        ? `<img src="/images/heart.svg">`
-        : `<img src="/images/heart-hollow.svg">`;
-      // button.textContent = isFavorite(this.movie.id)
-      //   ? "☑️ Favorite"
-      //   : "Add Favorite";
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const isNowFavorite = toggleFavorite(this.movie);
+      const heroImg = document.querySelector(".movie-details");
+
+      button.innerHTML = isNowFavorite
+        ? `<img src="/images/heart.svg" alt="Movie in favorites">`
+        : `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
+
+      // Add or remove the corner badge
+      if (isNowFavorite) {
+        // Only add if it doesn't already exist
+        if (!heroImg.querySelector(".favorite-badge")) {
+          const badge = document.createElement("div");
+          badge.className = "favorite-badge";
+          badge.innerHTML = `<img src="/images/heart.svg" alt="Movie in favorites">`;
+          heroImg.querySelector(".movie-hero").prepend(badge);
+        }
+      } else {
+        heroImg.querySelector(".favorite-badge")?.remove();
+      }
     });
   }
 }
@@ -68,10 +82,18 @@ function movieDetailsTemplate(movie) {
   const genre = formatList(movie.genres) || "No Genres Found";
   const directors = formatList(movie.directors) || "No Directors Found";
   const streaming = streamingServices(movie) || [];
-  // const favorite = isFavorite(movie.id) ? "☑️ Favorite" : "Add Favorite";
-  const favorite = isFavorite(movie.id)
+
+  const isFav = isFavorite(movie.id);
+
+  const favorite = isFav
     ? `<img src="/images/heart.svg">`
     : `<img src="/images/heart-hollow.svg">`;
+
+  const favoriteBadge = isFav
+    ? ` <div class="favorite-badge">
+          <img src="/images/heart.svg" alt="Movie in favorites">
+        </div>`
+    : "";
 
   const backdrop =
     movie.imageSet?.horizontalBackdrop?.w1080 ||
@@ -85,6 +107,7 @@ function movieDetailsTemplate(movie) {
   return `
     <section class="movie-details">
       <div class="movie-hero">
+        ${favoriteBadge}
         <img class="hero-background" src="${backdrop}" alt="${title} backdrop" loading="lazy">
         <div class="hero-overlay"></div>
         </div>

@@ -1,46 +1,60 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies | Search - A place to find you favorite movies</title>
+    <meta
+      name="description"
+      content="Search for your new favorite movie to watch tonight."
+    />
+    <meta name="author" content="Jacob Dwayne Ethington" />
+    <!-- ******************** Facebook ******************** -->
+    <meta
+      property="og:title"
+      content="Movies | Search - A place to find you favorite movies"
+    />
+    <meta
+      property="og:description"
+      content="Search page for finding your new favorite movie to watch tonight."
+    />
+    <meta
+      property="og:image"
+      content="https://wdd330-final-project-bg8o.onrender.com"
+    />
+    <meta
+      property="og:url"
+      content="https://wdd330-final-project-bg8o.onrender.com"
+    />
 
-  <title>Movies | Search - A place to find you favorite movies</title>
-  <meta name="description" content="Search for your new favorite movie to watch tonight." />
-  <meta name="author" content="Jacob Dwayne Ethington" />
-  <!-- ******************** Facebook ******************** -->
-  <meta property="og:title" content="Movies | Search - A place to find you favorite movies" />
-  <meta property="og:description" content="Search page for finding your new favorite movie to watch tonight." />
-  <meta property="og:image" content="https://wdd330-final-project-bg8o.onrender.com" />
-  <meta property="og:url" content="https://wdd330-final-project-bg8o.onrender.com" />
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
 
-  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/movieList.js"></script>
 
-  <link rel="stylesheet" href="/css/style.css" />
-  <script type="module" src="/js/movieList.js"></script>
+    <!-- google fonts Roboto & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-  <!-- google fonts Roboto & Playfair Display -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
-    rel="stylesheet" />
-</head>
+  <body>
+    <header class="divider" id="main-header"></header>
 
-<body>
-  <header class="divider" id="main-header"></header>
+    <h1 class="divider">Movie List</h1>
 
-  <h1 class="divider">Movie List</h1>
-
-  <main class="divider">
-    <section class="movie-lists">
-      <h2 id="search-name">Search Results</h2>
-      <div class="movies-list" id="search-results">
-        <p class="loading">Loading Movies...</p>
-      </div>
-    </section>
-  </main>
-  <footer id="main-footer"></footer>
-</body>
-
+    <main class="divider">
+      <section class="movie-lists">
+        <h2 id="search-name">Search Results</h2>
+        <div class="movies-list" id="search-results">
+          <p class="loading">Loading Movies...</p>
+        </div>
+      </section>
+    </main>
+    <footer id="main-footer"></footer>
+  </body>
 </html>
