@@ -21,14 +21,13 @@ export default class MovieDetails {
     } else {
       // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
       this.movie = await this.dataSource.getMovieById(this.movieId);
-
-      // Set the title for the browser tab ===========================================
-      const title = this.movie?.title || "Movie";
-      document.title = `Movies | ${title}`;
-      // Set the Page title ===========================================
-      const h1 = document.querySelector("h1");
-      h1.innerText = title;
     }
+    // Set the title for the browser tab ===========================================
+    const title = this.movie?.title || "Movie";
+    document.title = `FindMovie | ${title}`;
+    // Set the Page title ===========================================
+    const h1 = document.querySelector("h1");
+    h1.innerHTML = `Movie Details for: ${title}`;
     this.renderMovieDetails();
   }
 

@@ -5,7 +5,7 @@ export default class Favorites {
   constructor() {
     this.movies = [];
     this.listSelection = document.querySelector("#favorites");
-    this.noFavorites = document.querySelector("#favorites");
+    // this.noFavorites = document.querySelector("#favorites");
   }
 
   async init() {
@@ -13,7 +13,7 @@ export default class Favorites {
     this.movies = await getLocalStorage(STORAGE_KEY);
 
     if (this.movies.length == 0) {
-      this.noFavorites.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
+      this.listSelection.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
     } else {
       renderMovieList(this.movies, this.listSelection);
     }
@@ -92,16 +92,18 @@ export function updateFavoritesList(movie, isNowFavorite) {
           // Remove this card from favorites list
           newCard.remove();
           // Update every other card of the same movie on the page
-          document.querySelectorAll(`.movie-card[data-id="${movie.id}"]`).forEach((otherCard) => {
-            // remove the favorite badge
-            otherCard.querySelector(".favorite-badge")?.remove();
+          document
+            .querySelectorAll(`.movie-card[data-id="${movie.id}"]`)
+            .forEach((otherCard) => {
+              // remove the favorite badge
+              otherCard.querySelector(".favorite-badge")?.remove();
 
-            // Change button back to hollow heart
-            const otherBtn = otherCard.querySelector(".favorite-btn");
-            if (otherBtn) {
-              otherBtn.innerHTML = `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
-            }
-          });
+              // Change button back to hollow heart
+              const otherBtn = otherCard.querySelector(".favorite-btn");
+              if (otherBtn) {
+                otherBtn.innerHTML = `<img src="/images/heart-hollow.svg" alt="Add to favorites">`;
+              }
+            });
 
           // Show empty message if Favorite list is now empty
           if (!favoritesContainer.querySelector(".movie-card")) {

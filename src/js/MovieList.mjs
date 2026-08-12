@@ -23,7 +23,10 @@ export default class MovieList {
     const title = this.searchQuery;
     // Set the title for the browser tab ===========================================
     if (title !== null) {
-      document.title = `Movies | ${toTitleCase(title)}`;
+      document.title = `FindMovie | ${toTitleCase(title)}`;
+      // Set the Page title ===========================================
+      const h1 = document.querySelector("h2");
+      h1.innerHTML = `Search Results for: ${title}`;
     }
   }
 
