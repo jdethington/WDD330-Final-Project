@@ -11,6 +11,9 @@ https://wdd330-final-project-bg8o.onrender.com
 Trello board:
 https://trello.com/b/RuOzyH8A
 
+Final Video demonstration:
+https://youtu.be/eaLRXMk_GyY
+
 ### Common Workflow Commands
 
 - `npm run lint` to run ESLint against your code to find errors.
