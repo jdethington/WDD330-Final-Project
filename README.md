@@ -14,6 +14,22 @@ https://trello.com/b/RuOzyH8A
 Final Video demonstration:
 https://youtu.be/eaLRXMk_GyY
 
+---
+
+API for Streaming Availability on RapidAPI.com:
+https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/Streaming%20Availability
+
+Movie of the Night:
+https://developers.movieofthenight.com/
+
+API documentation for both API's
+https://docs.movieofthenight.com/
+
+---
+
+The Movie Database:
+https://developer.themoviedb.org/reference/getting-started
+
 ### Common Workflow Commands
 
 - `npm run lint` to run ESLint against your code to find errors.
