@@ -1,5 +1,5 @@
 // API imports
-const rapidAPI = import.meta.env.VITE_RAPID_API_KEYS;
+const rapidAPI = import.meta.env.VITE_RAPID_API_KEY;
 const movieOfTheNightAPI = import.meta.env.VITE_MOTN_API_KEY;
 // ============================================================
 import * as streamingAvailability from "streaming-availability";
