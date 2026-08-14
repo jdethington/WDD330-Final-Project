@@ -3,7 +3,7 @@ export const STORAGE_KEY = "FM-favorites";
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key)) || [];
+  return JSON.parse(localStorage.getItem(key));
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
@@ -90,7 +90,7 @@ export function formatList(items) {
 
   return formatted || "Unavailable";
 }
-// Crates a list of services that are streaming the movie 
+// Crates a list of services that are streaming the movie
 export function streamingServices(movie) {
   // console.log("PreMap", movie.streamingOptions.us);
   if (!movie.streamingOptions.us) {
@@ -123,7 +123,7 @@ export function streamingServices(movie) {
 
   return serviceHTML;
 }
-// Sets the Movie Title to title case 
+// Sets the Movie Title to title case
 export function toTitleCase(str) {
   if (!str) return "";
   const small = new Set([
