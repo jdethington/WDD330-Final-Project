@@ -16,7 +16,7 @@ export default class MovieList {
 
   async init() {
     // use the datasource to get the details for the current movie. findMovieById will return a promise! use await to process it
-    this.movies = await this.dataSource.searchShows(this.searchQuery);
+    this.movies = await this.dataSource.searchShowsByTitle(this.searchQuery);
 
     renderMovieList(this.movies, this.listSection);
 
@@ -38,6 +38,12 @@ export default class MovieList {
 
   async getNewestShows(series, type) {
     this.movies = await this.dataSource.getNewestShows(series, type);
+
+    renderMovieList(this.movies, this.listSection);
+  }
+
+  async getChanges() {
+    this.movies = await this.dataSource.getChanges();
 
     renderMovieList(this.movies, this.listSection);
   }

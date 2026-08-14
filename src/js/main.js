@@ -18,6 +18,7 @@ const searchQuery = getParam("id") || null; // Search term passed in the URL que
 const listSection = document.querySelector("#top-movies"); // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.
 const movieList = new MovieList(searchQuery, dataSource, listSection);
 movieList.getTopShows("prime", "movie");
+// movieList.getChanges();
 
 // Top series in Prime Video
 const seriesSection = document.querySelector("#new-movies"); // Which section to render the list into. This is a CSS selector for the section element in the HTML where the movie list will be displayed.

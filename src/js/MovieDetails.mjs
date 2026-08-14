@@ -15,7 +15,7 @@ export default class MovieDetails {
   async init() {
     // Determine if movie info is stored as Favorite
     if (isFavorite(this.movieId)) {
-      const favorites = await getLocalStorage(STORAGE_KEY);
+      const favorites = (await getLocalStorage(STORAGE_KEY)) || [];
       const movieLS = favorites.find((movie) => movie.id == this.movieId);
       this.movie = movieLS || {};
     } else {
