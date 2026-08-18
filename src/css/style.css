@@ -72,16 +72,28 @@ p {
 
 /* ********** Header Start ********** */
 header {
-  padding: 0.5rem;
-}
+  /* padding: 0.5rem; */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(240, 242, 245, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
 
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+}
 .logo {
-  line-height: 60px;
-  width: 245px;
+  line-height: 45px;
+  /* width: 245px; */
   overflow: hidden;
   display: flex;
   align-items: center;
-  font-size: 30px;
+  font-size: 26px;
   text-align: right;
   font-family: var(--font-headline);
   transition: all 0.5s ease;
@@ -91,8 +103,8 @@ header {
 }
 
 .logo img {
-  width: 60px;
-  height: 60px;
+  width: 35px;
+  height: 35px;
 }
 
 .logo a {
@@ -101,10 +113,41 @@ header {
 }
 
 /* ----- Search Field start ----- */
+.search {
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  gap: 1rem;
+}
+
+/* search modal */
+dialog {
+  max-width: 400px;
+  /* height: 300px; */
+  background-color: var(--primary);
+  border: 1px solid black;
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  padding: 1rem;
+  margin: 4rem auto;
+  /* & > button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: transparent;
+    border: none;
+    img {
+      width: 25px;
+    }
+  } */
+}
+::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
 form {
   display: grid;
   gap: 0.5rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 /* input[type="text"] { */
 input {
@@ -149,7 +192,11 @@ input:hover {
 .btn-search {
   background-color: var(--secondary);
   color: white;
-  padding: 8.5px 12px;
+  padding: 8px 8px;
+  img {
+    height: 25px;
+    width: auto;
+  }
 }
 .btn-details {
   border: var(--light-grey);
@@ -165,12 +212,13 @@ input:hover {
 /* button in header */
 .btn-favorites {
   display: flex;
-  background-color: var(--primary);
+  background-color: var(--secondary);
+  /* background-color: var(--primary); */
   color: var(--light-grey);
   margin: auto;
-  padding: 8px 12px;
+  padding: 8px 8px;
   img {
-    height: 27px;
+    height: 25px;
     width: auto;
   }
 }
@@ -210,40 +258,58 @@ main {
 .movies-list {
   display: flex;
   flex-wrap: nowrap;
-  list-style-type: none;
+  /* list-style-type: none; */
+  list-style: none;
+
   justify-content: space-around;
   min-height: 287px;
   background-color: var(--secondary);
   overflow-x: auto;
   overflow-y: hidden;
+
   gap: 1rem;
   padding: 1rem 1rem 0 1rem;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
-  scrollbar-color: #f59f0baf transparent;
+  scrollbar-color: var(--accent) transparent;
+  /* scrollbar-color: #f59f0baf transparent; */
+  scrollbar-width: thin;
+  border-radius: var(--radius);
 }
 
-.movies-list::-webkit-scrollbar {
+/* .movies-list::-webkit-scrollbar {
   height: 10px;
 }
-
 .movies-list::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+} */
+/* nicer scrollbar */
+.movies-list::-webkit-scrollbar {
+  height: 8px;
+}
+.movies-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.movies-list::-webkit-scrollbar-thumb {
+  background: var(--accent);
   border-radius: 999px;
 }
 
 .movie-card {
   flex: 0 0 var(--card-width-mobile);
-  scroll-snap-align: center;
+  /* scroll-snap-align: center; */
   /* ----- the flip card container ----- */
-  padding: 0;
-  max-width: var(--card-width-mobile);
-  background-color: transparent;
+  /* padding: 0; */
+  /* max-width: var(--card-width-mobile); */
+  /* background-color: transparent; */
 
   width: var(--card-width-mobile);
   height: var(--card-height-mobile);
 
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+  transition: transform 0.25s ease;
 }
 .card-inner {
   /* This container is needed to position the front and back side */
@@ -255,6 +321,7 @@ main {
 }
 .movie-card:hover .card-inner {
   /* Do an horizontal flip when you move the mouse over the flip box container */
+  transform: translateY(-6px);
   transform: rotateY(180deg);
 }
 
@@ -522,8 +589,9 @@ footer {
   }
 
   /* ----- header start ----- */
-  header {
+  /* header {
     display: flex;
+    gap: 1rem;
     flex-wrap: wrap;
     justify-content: space-between;
   }
@@ -536,7 +604,7 @@ footer {
   form {
     display: flex;
     margin-top: 0rem;
-  }
+  } */
   /* ----- header end ----- */
 
   /* ----- Styles for movie lists ----- */

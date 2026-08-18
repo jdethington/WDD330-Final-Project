@@ -4,10 +4,20 @@
 </div>
 <div class="search">
   <div>
-    <a class="btn btn-favorites" href="/favorites/index.html">Favorites</a>
+    <a class="btn btn-favorites" href="/favorites/index.html"><img src="/images/favorite-heart.svg" alt="Favorites"></a>
+    <!-- <a class="btn btn-favorites" href="/favorites/index.html">Favorites</a> -->
   </div>
+  <button class="btn btn-search" popovertarget="openSearchModal"><img src="../images/search.svg"
+      alt="Open Search"></button>
+</div>
+
+<dialog id="openSearchModal" popover>
+  <!-- <button class="btn" popovertarget="openSearchModal" popovertargetaction="hide">
+    <img src="../images/x-circle-hollow.svg" alt="Close button">
+  </button> -->
   <form action="/movieList/index.html">
     <input type="text" placeholder="Search.." name="id" required />
     <button type="submit" class="btn btn-search">Search</button>
   </form>
-</div>
+
+</dialog>
