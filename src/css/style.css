@@ -144,29 +144,6 @@ dialog {
 ::backdrop {
   background-color: rgb(0 0 0 / 50%);
 }
-form {
-  display: grid;
-  gap: 0.5rem;
-  /* margin-top: 1rem; */
-}
-/* input[type="text"] { */
-input {
-  padding: 9.5px;
-  border: 2px solid var(--background-dark);
-  border-radius: var(--radius);
-  font-size: 1.25rem;
-  /* color: var(--dark-grey); */
-  transition: all var(--transition-medium);
-}
-input:valid {
-  border: 2px solid var(--primary);
-}
-/* keep hover subtle to avoid layout shifts */
-input:focus,
-input:hover {
-  transform: scale(1.05);
-  outline: none;
-}
 /* ----- Search Field end ----- */
 /* ********** Header End ********** */
 
@@ -221,6 +198,15 @@ input:hover {
     height: 25px;
     width: auto;
   }
+}
+.btn-save {
+  display: flex;
+  background-color: var(--secondary);
+  color: var(--light-grey);
+  margin: auto;
+  padding: 9px 9px;
+  width: 100%;
+  max-width: 350px;
 }
 /* Button to add to favorite on movie cards */
 .favorite-btn {
@@ -580,6 +566,54 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+/* ----- Forms start ----- */
+fieldset {
+  padding: 1rem;
+  margin: 1rem;
+  border: 2px solid var(--background-dark);
+  border-radius: var(--radius);
+  background-color: var(--background-light);
+}
+.form-checkbox {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  padding-bottom: 0.5rem;
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+input[type="checkbox"] {
+  width: 13px;
+  height: auto;
+  accent-color: var(--primary);
+}
+form {
+  display: grid;
+  gap: 0.5rem;
+  /* margin-top: 1rem; */
+}
+/* input[type="text"] { */
+input[type="text"] {
+  padding: 9.5px;
+  border: 2px solid var(--background-dark);
+  border-radius: var(--radius);
+  font-size: 1.25rem;
+  /* color: var(--dark-grey); */
+  transition: all var(--transition-medium);
+}
+input:valid {
+  border: 2px solid var(--primary);
+}
+/* keep hover subtle to avoid layout shifts */
+input:focus,
+input:hover {
+  transform: scale(1.05);
+  outline: none;
+}
+/* ----- Forms end ----- */
 
 /* ********** Movie details — tablet & up ********** */
 @media screen and (min-width: 600px) {
@@ -620,6 +654,14 @@ footer {
   .movie-card h3,
   .movie-card p {
     font-size: var(--large-font);
+  }
+  .form-checkbox {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--primary);
   }
 
   @keyframes slideInFromLeft {
@@ -681,4 +723,7 @@ footer {
     grid-template-columns: 100px 1fr;
   }
   /* ----- Details page end ----- */
+  .form-checkbox {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

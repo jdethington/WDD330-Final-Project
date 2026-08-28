@@ -1,3 +1,4 @@
+// import { settings } from "cluster";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 
@@ -12,6 +13,7 @@ export default defineConfig({
         movieList: resolve(__dirname, "src/movieList/index.html"),
         moviePage: resolve(__dirname, "src/moviePage/index.html"),
         favorites: resolve(__dirname, "src/favorites/index.html"),
+        settings: resolve(__dirname, "src/settings/index.html"),
       },
     },
   },

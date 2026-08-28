@@ -3,7 +3,7 @@ const rapidAPI = import.meta.env.VITE_RAPID_API_KEY;
 const movieOfTheNightAPI = import.meta.env.VITE_MOTN_API_KEY;
 // ============================================================
 import * as streamingAvailability from "streaming-availability";
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, CLIENT_KEY } from "./utils.mjs";
 
 export default class MovieData {
   constructor() {
@@ -20,13 +20,13 @@ export default class MovieData {
     );
 
     if (
-      getLocalStorage("FM-client") === true ||
-      getLocalStorage("FM-client") === false
+      getLocalStorage(CLIENT_KEY) === true ||
+      getLocalStorage(CLIENT_KEY) === false
     ) {
-      this.usePrimary = getLocalStorage("FM-client");
+      this.usePrimary = getLocalStorage(CLIENT_KEY);
     } else {
-      setLocalStorage("FM-client", true);
-      this.usePrimary = getLocalStorage("FM-client");
+      setLocalStorage(CLIENT_KEY, true);
+      this.usePrimary = getLocalStorage(CLIENT_KEY);
     }
     this.firstAttempt = true;
   }
@@ -140,8 +140,8 @@ export default class MovieData {
       if ((error.status === 429 || error.status === 403) && this.firstAttempt) {
         console.warn("Primary API quota exhausted - switching to secondary.");
         this.usePrimary
-          ? setLocalStorage("FM-client", false)
-          : setLocalStorage("FM-client", true);
+          ? setLocalStorage(CLIENT_KEY, false)
+          : setLocalStorage(CLIENT_KEY, true);
         this.firstAttempt = false;
         return this.searchStreaming(type, data);
       }

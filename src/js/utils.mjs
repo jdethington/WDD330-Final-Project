@@ -1,5 +1,7 @@
 // const STORAGE_KEY = "Movie-favorites";
 export const STORAGE_KEY = "FM-favorites";
+export const CLIENT_KEY = "FM-client";
+export const STREAMING_KEY = "FM-streaming";
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
