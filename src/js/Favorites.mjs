@@ -3,20 +3,63 @@ import { movieCardTemplate, renderMovieList } from "./MovieList.mjs";
 
 export default class Favorites {
   constructor() {
-    this.movies = [];
+    this.allFavorites = [];
     this.listSelection = document.querySelector("#favorites");
-    // this.noFavorites = document.querySelector("#favorites");
+    this.currentType = "movie"; // default to movie, but could be changed to series in the future
   }
 
   async init() {
     // get movies from local storage
-    this.movies = await getLocalStorage(STORAGE_KEY);
+    this.allFavorites = await getLocalStorage(STORAGE_KEY);
 
-    if (this.movies.length == 0) {
-      this.listSelection.innerHTML = `<h2 class="no-favorites">Your favorite movies will show up here after you select them.</h2>`;
+    if (this.allFavorites.length == 0) {
+      this.listSelection.innerHTML = `<h2 class="no-favorites">Your favorite movies and series will show up here after you select them.</h2>`;
     } else {
-      renderMovieList(this.movies, this.listSelection);
+      this.setupTabs();
+      this.displayFilteredFavorites();
+      // renderMovieList(this.allFavorites, this.listSelection);
     }
+  }
+
+  setupTabs() {
+    const buttons = document.querySelectorAll(".tab-btn");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("active")) return; // do nothing if the button is already active
+        buttons.forEach((b) => (b.disabled = true)); // disable all buttons while processing
+        // Remove the 'active' class from all buttons
+        buttons.forEach((b) => b.classList.remove("active"));
+        // Add the 'active' class to the clicked button
+        btn.classList.add("active");
+        // Update the currentType based on the button's data-type attribute
+        this.currentType = btn.dataset.type;
+        this.displayFilteredFavorites();
+        setTimeout(() => {
+          buttons.forEach((b) => (b.disabled = false)); // re-enable buttons after processing
+        }, 300);
+      });
+    });
+  }
+
+  displayFilteredFavorites() {
+    const container = this.listSelection;
+    container.innerHTML = ""; // Clear the container before rendering new content
+    container.innerHTML = `
+      <div class="spinner" id="spinner"></div>
+    `; // Add spinner while loading
+
+    setTimeout(() => {
+      const filteredFavorites = this.allFavorites.filter(
+        (item) => item.showType === this.currentType,
+      );
+
+      if (filteredFavorites.length === 0) {
+        container.innerHTML = `<h2 class="no-favorites">No ${this.currentType}s in your favorites.</h2>`;
+      } else {
+        renderMovieList(filteredFavorites, container);
+      }
+    }, 500); // Simulate a delay for loading effect
   }
 }
 
@@ -109,7 +152,7 @@ export function updateFavoritesList(movie, isNowFavorite) {
           if (!favoritesContainer.querySelector(".movie-card")) {
             favoritesContainer.innerHTML = `
               <h2 class="no-favorites">
-                Your favorite movies will show up here after you select them.
+                Your favorite movies and series will show up here after you select them.
               </h2>`;
           }
         }

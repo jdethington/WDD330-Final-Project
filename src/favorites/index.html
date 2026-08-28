@@ -1,60 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Movies | Favorites - A place to find you favorite movies</title>
-    <meta
-      name="description"
-      content="Favorites page for finding your new favorite movie to watch tonight."
-    />
-    <meta name="author" content="Jacob Dwayne Ethington" />
-    <!-- ******************** Facebook ******************** -->
-    <meta
-      property="og:title"
-      content="Movies | Favorites - A place to find you favorite movies"
-    />
-    <meta
-      property="og:description"
-      content="Favorites page for finding your new favorite movie to watch tonight."
-    />
-    <meta
-      property="og:image"
-      content="https://wdd330-final-project-bg8o.onrender.com"
-    />
-    <meta
-      property="og:url"
-      content="https://wdd330-final-project-bg8o.onrender.com"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+  <title>Movies | Favorites - A place to find you favorite movies</title>
+  <meta name="description" content="Favorites page for finding your new favorite movie to watch tonight." />
+  <meta name="author" content="Jacob Dwayne Ethington" />
+  <!-- ******************** Facebook ******************** -->
+  <meta property="og:title" content="Movies | Favorites - A place to find you favorite movies" />
+  <meta property="og:description" content="Favorites page for finding your new favorite movie to watch tonight." />
+  <meta property="og:image" content="https://wdd330-final-project-bg8o.onrender.com" />
+  <meta property="og:url" content="https://wdd330-final-project-bg8o.onrender.com" />
 
-    <link rel="stylesheet" href="/css/style.css" />
-    <script type="module" src="/js/favorites.js"></script>
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
 
-    <!-- google fonts Roboto & Playfair Display -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="module" src="/js/favorites.js"></script>
 
-  <body>
-    <header class="divider" id="main-header"></header>
+  <!-- google fonts Roboto & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@100..900&display=swap"
+    rel="stylesheet" />
+</head>
 
-    <h1 class="divider">Favorites</h1>
+<body>
+  <header class="divider" id="main-header"></header>
+  <div class="divider title-row">
 
-    <main class="divider">
-      <section class="movie-lists">
-        <div class="movies-list" id="favorites">
-          <p class="loading">Loading Movies...</p>
-        </div>
-      </section>
-    </main>
+    <h1>Favorites</h1>
+    <div class="favorites-tabs">
+      <button class="tab-btn active" data-type="movie">Movies</button>
+      <button class="tab-btn" data-type="series">Series</button>
+    </div>
+  </div>
 
-    <footer id="main-footer"></footer>
-  </body>
+  <main class="divider">
+
+
+    <section class="movie-lists">
+      <div class="movies-list" id="favorites">
+        <!-- <div class="spinner hidden" id="spinner"></div> -->
+        <!-- <p class="loading">Loading...</p> -->
+      </div>
+    </section>
+
+    <!-- <section class="movie-lists divider">
+      <h2>Movies</h2>
+      <div class="movies-list" id="favorites">
+        <p class="loading">Loading Movies...</p>
+      </div>
+    </section>
+
+    <section class="movie-lists divider">
+      <h2>Series</h2>
+      <div class="movies-list" id="series">
+        <p class="loading">Loading Series...</p>
+      </div>
+    </section> -->
+  </main>
+
+  <footer id="main-footer"></footer>
+</body>
+
 </html>
